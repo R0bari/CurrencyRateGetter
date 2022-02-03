@@ -10,10 +10,7 @@ namespace RateGetters.Rates.Models
     {
         private IEnumerable<RateForDate> List { get; }
 
-        private PeriodRateList(IEnumerable<RateForDate> list)
-        {
-            List = list;
-        }
+        private PeriodRateList(IEnumerable<RateForDate> list) => List = list;
         
         public static PeriodRateList Prepare(DataTable currency, CurrencyCodesEnum code)
         {

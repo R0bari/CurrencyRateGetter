@@ -8,11 +8,7 @@ namespace RateGetters.Rates.Models
         public Rate Rate { get; }
         public DateTime DateTime { get; }
 
-        public RateForDate(Rate rate, DateTime dateTime)
-        {
-            Rate = rate;
-            DateTime = dateTime;
-        }
+        public RateForDate(Rate rate, DateTime dateTime) => (Rate, DateTime) = (rate, dateTime);
 
         public override string ToString() => $"{Rate} for Date {DateTime.ToShortDateString()}.";
     }
