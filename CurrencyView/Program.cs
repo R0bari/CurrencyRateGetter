@@ -1,5 +1,4 @@
 ﻿using System;
-using RateGetters.Rates;
 using RateGetters.Rates.Getters;
 using RateGetters.Rates.Interfaces;
 using RateGetters.Rates.Models;
@@ -12,9 +11,13 @@ namespace CurrencyView
         {
             IRateGetter rateGetter = new CbrRateGetter();
             
-            var usdRateResultForToday = rateGetter.GetRate(DateTime.Now, CurrencyCodesEnum.Usd);
-            var usdRateResultForJuly = rateGetter.GetRate(new DateTime(1021, 06, 1), CurrencyCodesEnum.Usd);
-            var usdPeriodRateResult = rateGetter.GetRateForPeriod(
+            var usdRateResultForToday = rateGetter.GetRate(
+                DateTime.Now,
+                CurrencyCodesEnum.Usd);
+            var usdRateResultForJuly = rateGetter.GetRate(
+                new DateTime(1021, 06, 1),
+                CurrencyCodesEnum.Usd);
+            var usdPeriodRateResult = rateGetter.GetRatesForPeriod(
                 new DateTime(2021, 12, 01),
                 new DateTime(2022, 01, 04),
                 CurrencyCodesEnum.Usd);

@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace RateGetters.Rates.Models
 {
-    public class PeriodRateList : IEnumerable<RateForDate>
+    public record PeriodRateList : IEnumerable<RateForDate>
     {
-        private IEnumerable<RateForDate> List { get; }
+        private readonly IEnumerable<RateForDate> _list;
 
-        private PeriodRateList(IEnumerable<RateForDate> list) => List = list;
+        private PeriodRateList(IEnumerable<RateForDate> list) => _list = list;
         
         public static PeriodRateList Prepare(DataTable currency, CurrencyCodesEnum code)
         {
@@ -23,7 +23,7 @@ namespace RateGetters.Rates.Models
 
         public IEnumerator<RateForDate> GetEnumerator()
         {
-            return List.GetEnumerator();
+            return _list.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

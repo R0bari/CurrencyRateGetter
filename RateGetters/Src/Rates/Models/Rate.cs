@@ -1,12 +1,22 @@
-﻿namespace RateGetters.Rates.Models
+﻿using System.ComponentModel;
+
+namespace RateGetters.Rates.Models
 {
     public record Rate
     {
-        public CurrencyCodesEnum Code { get; }
-        public decimal Value { get; }
+        private readonly CurrencyCodesEnum _code;
+        private readonly decimal _value;
 
-        public Rate(CurrencyCodesEnum code, decimal value) => (Code, Value) = (code, value);
+            public Rate(CurrencyCodesEnum code, decimal value) => (_code, _value) = (code, value);
         
-        public override string ToString() => $"Currency \"{Code.ToString()}\" is {Value}.";
+        public override string ToString() => $"Currency \"{_code.ToString()}\" is {_value}.";
+    }
+    
+    public enum CurrencyCodesEnum
+    {
+        [Description("R01235")]
+        Usd,
+        [Description("R01239")]
+        Eur
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using RateGetters.Rates;
 using RateGetters.Rates.Getters;
 using RateGetters.Rates.Interfaces;
 using RateGetters.Rates.Models;
@@ -20,13 +19,13 @@ namespace RateGetters.Tests
         [InlineData(86.2826, CurrencyCodesEnum.Eur, 2022, 02, 03)]
         public void TestCurrenciesRates(decimal expectedValue, CurrencyCodesEnum code, int year, int month, int day)
         {
+            var date = new DateTime(year, month, day);
             Assert.Equal(
-                expectedValue,
+                new RateForDate(
+                    new Rate(code, expectedValue),
+                    date),
                 _rateGetter
-                    .GetRate(new DateTime(year,month, day), code)
-                    .Result
-                    .Rate
-                    .Value);
+                    .GetRate(date, code).Result);
         }
     }
 }

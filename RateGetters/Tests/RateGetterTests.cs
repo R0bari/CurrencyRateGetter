@@ -18,16 +18,6 @@ namespace RateGetters.Tests
         }
 
         [Fact]
-        public void TestSuccessfulCbrRateGetterSingleResult()
-        {
-            var now = DateTime.Now;
-            var rateResultForToday = _rateGetter.GetRate(now, CurrencyCodesEnum.Usd);
-            AssertStatusSuccess(rateResultForToday);
-            Assert.Equal(now, rateResultForToday.Result.DateTime);
-            Assert.Equal(CurrencyCodesEnum.Usd, rateResultForToday.Result.Rate.Code);
-        }
-
-        [Fact]
         public void TestFailedCbrRateGetterSingleResult()
         {
             var farPast = new DateTime(1021, 06, 1);
@@ -40,14 +30,22 @@ namespace RateGetters.Tests
             var periodStart = new DateTime(2021, 12, 01);
             var holidayDate = new DateTime(2022, 01, 04);
             var firstBeforeHolidayDate = new DateTime(2021, 12, 31);
-            var periodRateResult = _rateGetter.GetRateForPeriod(
+            var periodRateResult = _rateGetter.GetRatesForPeriod(
                 holidayDate,
                 periodStart,
                 CurrencyCodesEnum.Usd);
             AssertStatusSuccess(periodRateResult);
             Assert.Equal(23, periodRateResult.Result.Count());
-            Assert.Equal(periodStart, periodRateResult.Result.First().DateTime);
-            Assert.Equal(firstBeforeHolidayDate, periodRateResult.Result.Last().DateTime);
+            Assert.Equal(
+                new RateForDate(
+                    new Rate(CurrencyCodesEnum.Usd, 74.8926m),
+                    periodStart),
+                periodRateResult.Result.First());
+            Assert.Equal(
+                new RateForDate(
+                    new Rate(CurrencyCodesEnum.Usd, 74.2926m),
+                    firstBeforeHolidayDate),
+                periodRateResult.Result.Last());
         }
 
         [Fact]
@@ -55,7 +53,7 @@ namespace RateGetters.Tests
         {
             var start = new DateTime(1021, 06, 1);
             var end = DateTime.Now;
-            var periodRateResult = _rateGetter.GetRateForPeriod(start, end, CurrencyCodesEnum.Usd);
+            var periodRateResult = _rateGetter.GetRatesForPeriod(start, end, CurrencyCodesEnum.Usd);
             AssertStatusFail(periodRateResult);
         }
 

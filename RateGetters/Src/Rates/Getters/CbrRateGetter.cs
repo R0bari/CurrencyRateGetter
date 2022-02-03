@@ -50,7 +50,7 @@ namespace RateGetters.Rates.Getters
             return RateGetterResult<RateForDate>.Failed(CurrencyNotFoundErrorMessage);
         }
 
-        public RateGetterResult<PeriodRateList> GetRateForPeriod(DateTime first, DateTime second,
+        public RateGetterResult<PeriodRateList> GetRatesForPeriod(DateTime first, DateTime second,
             CurrencyCodesEnum code)
         {
             var ds = new DataSet();
