@@ -2,6 +2,7 @@
 using RateGetters.Rates;
 using RateGetters.Rates.Getters;
 using RateGetters.Rates.Interfaces;
+using RateGetters.Rates.Models;
 
 namespace CurrencyView
 {

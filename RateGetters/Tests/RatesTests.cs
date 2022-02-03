@@ -2,6 +2,7 @@
 using RateGetters.Rates;
 using RateGetters.Rates.Getters;
 using RateGetters.Rates.Interfaces;
+using RateGetters.Rates.Models;
 using Xunit;
 
 namespace RateGetters.Tests
@@ -24,6 +25,7 @@ namespace RateGetters.Tests
                 _rateGetter
                     .GetRate(new DateTime(year,month, day), code)
                     .Result
+                    .Rate
                     .Value);
         }
     }

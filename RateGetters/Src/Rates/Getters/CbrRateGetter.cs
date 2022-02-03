@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using RateGetters.Infrastructure.Extensions;
 using RateGetters.Rates.Interfaces;
+using RateGetters.Rates.Models;
 
 namespace RateGetters.Rates.Getters
 {
@@ -42,15 +43,14 @@ namespace RateGetters.Rates.Getters
 
                 return RateGetterResult<RateForDate>.Successful(
                     new RateForDate(
-                        code,
-                        dateTime,
-                        Convert.ToDecimal(row["Value"].ToString())));
+                        new Rate(code, Convert.ToDecimal(row["Value"].ToString())),
+                        dateTime));
             }
 
             return RateGetterResult<RateForDate>.Failed(CurrencyNotFoundErrorMessage);
         }
 
-        public RateGetterResult<IEnumerable<RateForDate>> GetRateForPeriod(DateTime first, DateTime second,
+        public RateGetterResult<PeriodRateList> GetRateForPeriod(DateTime first, DateTime second,
             CurrencyCodesEnum code)
         {
             var ds = new DataSet();
@@ -69,8 +69,8 @@ namespace RateGetters.Rates.Getters
 
             var currency = ds.Tables["Record"];
             return currency?.Rows is null
-                ? RateGetterResult<IEnumerable<RateForDate>>.Failed("Given rate for given currency not found.")
-                : RateGetterResult<IEnumerable<RateForDate>>.Successful(PrepareRateList(currency, code));
+                ? RateGetterResult<PeriodRateList>.Failed("Given rate for given currency not found.")
+                : RateGetterResult<PeriodRateList>.Successful(PeriodRateList.Prepare(currency, code));
         }
 
         private static IEnumerable<RateForDate> PrepareRateList(DataTable currency, CurrencyCodesEnum code)
@@ -78,9 +78,8 @@ namespace RateGetters.Rates.Getters
             return currency.Rows
                 .Cast<DataRow>()
                 .Select(row => new RateForDate(
-                    code,
-                    Convert.ToDateTime(row["Date"]),
-                    Convert.ToDecimal(row["Value"])));
+                    new Rate(code, Convert.ToDecimal(row["Value"])),
+                    Convert.ToDateTime(row["Date"])));
         }
     }
 }
