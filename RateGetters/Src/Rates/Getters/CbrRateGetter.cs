@@ -20,7 +20,7 @@ namespace RateGetters.Rates.Getters
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
-        public RateGetterResult<RateForDate> GetRate(DateTime dateTime, CurrencyCodesEnum code)
+        public OperationResult<RateForDate> GetRate(DateTime dateTime, CurrencyCodesEnum code)
         {
             var ds = new DataSet();
             var dateInRequiredFormat = dateTime
@@ -31,7 +31,7 @@ namespace RateGetters.Rates.Getters
             var currencyRows = ds.Tables["Valute"]?.Rows;
             if (currencyRows is null)
             {
-                return RateGetterResult<RateForDate>.Failed(CurrencyNotFoundErrorMessage);
+                return OperationResult<RateForDate>.Failed(CurrencyNotFoundErrorMessage);
             }
 
             foreach (DataRow row in currencyRows)
@@ -41,16 +41,16 @@ namespace RateGetters.Rates.Getters
                     continue;
                 }
 
-                return RateGetterResult<RateForDate>.Successful(
+                return OperationResult<RateForDate>.Successful(
                     new RateForDate(
                         new Rate(code, Convert.ToDecimal(row["Value"].ToString())),
                         dateTime));
             }
 
-            return RateGetterResult<RateForDate>.Failed(CurrencyNotFoundErrorMessage);
+            return OperationResult<RateForDate>.Failed(CurrencyNotFoundErrorMessage);
         }
 
-        public RateGetterResult<PeriodRateList> GetRatesForPeriod(DateTime first, DateTime second,
+        public OperationResult<PeriodRateList> GetRatesForPeriod(DateTime first, DateTime second,
             CurrencyCodesEnum code)
         {
             var ds = new DataSet();
@@ -69,8 +69,8 @@ namespace RateGetters.Rates.Getters
 
             var currency = ds.Tables["Record"];
             return currency?.Rows is null
-                ? RateGetterResult<PeriodRateList>.Failed("Given rate for given currency not found.")
-                : RateGetterResult<PeriodRateList>.Successful(PeriodRateList.Prepare(currency, code));
+                ? OperationResult<PeriodRateList>.Failed(CurrencyNotFoundErrorMessage)
+                : OperationResult<PeriodRateList>.Successful(PeriodRateList.Prepare(currency, code));
         }
 
         private static IEnumerable<RateForDate> PrepareRateList(DataTable currency, CurrencyCodesEnum code)

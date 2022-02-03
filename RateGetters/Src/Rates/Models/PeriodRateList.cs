@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Microsoft.VisualBasic;
 
 namespace RateGetters.Rates.Models
 {
@@ -19,6 +20,14 @@ namespace RateGetters.Rates.Models
                 .Select(row => new RateForDate(
                     new Rate(code, Convert.ToDecimal(row["Value"])),
                     Convert.ToDateTime(row["Date"]))));
+        }
+
+        public override string ToString()
+        {
+            return Strings.Join(
+                _list.Select(el => el.ToString())
+                    .ToArray(),
+                "\n");
         }
 
         public IEnumerator<RateForDate> GetEnumerator()

@@ -17,11 +17,27 @@ namespace RateGetters.Tests
             _rateGetter = new CbrRateGetter();
         }
 
+        [Theory]
+        [InlineData(76.4849, CurrencyCodesEnum.Usd, 2022, 02, 03)]
+        [InlineData(86.2826, CurrencyCodesEnum.Eur, 2022, 02, 03)]
+        public void TestCurrenciesRates(decimal expectedValue, CurrencyCodesEnum code, int year, int month, int day)
+        {
+            var date = new DateTime(year, month, day);
+            Assert.Equal(
+                new RateForDate(
+                    new Rate(code, expectedValue),
+                    date),
+                _rateGetter
+                    .GetRate(date, code).Result);
+        }
+        
         [Fact]
         public void TestFailedCbrRateGetterSingleResult()
         {
             var farPast = new DateTime(1021, 06, 1);
-            AssertStatusFail(_rateGetter.GetRate(farPast, CurrencyCodesEnum.Usd));
+            Assert.Equal(
+                OperationResult<RateForDate>.Failed("Given rate for given currency not found."),
+                _rateGetter.GetRate(farPast, CurrencyCodesEnum.Eur));
         }
 
         [Fact]
@@ -34,7 +50,6 @@ namespace RateGetters.Tests
                 holidayDate,
                 periodStart,
                 CurrencyCodesEnum.Usd);
-            AssertStatusSuccess(periodRateResult);
             Assert.Equal(23, periodRateResult.Result.Count());
             Assert.Equal(
                 new RateForDate(
@@ -46,38 +61,6 @@ namespace RateGetters.Tests
                     new Rate(CurrencyCodesEnum.Usd, 74.2926m),
                     firstBeforeHolidayDate),
                 periodRateResult.Result.Last());
-        }
-
-        [Fact]
-        public void TestFailedCbrRateGetterPeriodResult()
-        {
-            var start = new DateTime(1021, 06, 1);
-            var end = DateTime.Now;
-            var periodRateResult = _rateGetter.GetRatesForPeriod(start, end, CurrencyCodesEnum.Usd);
-            AssertStatusFail(periodRateResult);
-        }
-
-
-        private static void AssertStatusSuccess<T>(RateGetterResult<T> result)
-        {
-            Assert.Equal(string.Empty, result.ErrorMessage);
-            Assert.True(result.IsSuccess);
-        }
-
-        private void AssertStatusFail<T>(RateGetterResult<T> result)
-        {
-            var expectedErrorMessage = GetPropValue(_rateGetter, "CurrencyNotFoundErrorMessage").ToString();
-            Assert.False(result.IsSuccess);
-            Assert.Equal(expectedErrorMessage, result.ErrorMessage);
-        }
-
-        private static object GetPropValue(object src, string propName)
-        {
-            return src
-                .GetType()
-                .GetProperty(propName, BindingFlags.NonPublic | BindingFlags.Instance)
-                ?.GetGetMethod(true)
-                ?.Invoke(src, null);
         }
     }
 }

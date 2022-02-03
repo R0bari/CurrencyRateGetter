@@ -22,23 +22,9 @@ namespace CurrencyView
                 new DateTime(2022, 01, 04),
                 CurrencyCodesEnum.Usd);
             
-            Console.WriteLine(usdRateResultForToday.IsSuccess
-                ? usdRateResultForToday.Result
-                : usdRateResultForToday.ErrorMessage);
-            Console.WriteLine(usdRateResultForJuly.IsSuccess
-                ? usdRateResultForJuly.Result
-                : usdRateResultForJuly.ErrorMessage);
-
-            if (!usdPeriodRateResult.IsSuccess)
-            {
-                Console.WriteLine(usdPeriodRateResult.ErrorMessage);
-                return;
-            }
-
-            foreach (var rateForDate in usdPeriodRateResult.Result)
-            {
-                Console.WriteLine(rateForDate.ToString());
-            }
+            Console.WriteLine(usdRateResultForToday);
+            Console.WriteLine(usdRateResultForJuly);
+            Console.WriteLine(usdPeriodRateResult);
         }
     }
 }

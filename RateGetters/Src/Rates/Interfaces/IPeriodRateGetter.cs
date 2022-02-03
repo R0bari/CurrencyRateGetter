@@ -6,7 +6,7 @@ namespace RateGetters.Rates.Interfaces
 {
     public interface IPeriodRateGetter
     {
-        public RateGetterResult<PeriodRateList> GetRatesForPeriod(
+        public OperationResult<PeriodRateList> GetRatesForPeriod(
             DateTime first,
             DateTime second,
             CurrencyCodesEnum code);
