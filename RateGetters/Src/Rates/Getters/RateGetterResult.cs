@@ -1,15 +1,15 @@
-﻿namespace RateGetters.Currencies.Getters
+﻿namespace RateGetters.Rates.Getters
 {
     public record RateGetterResult<T>
     {
         public bool IsSuccess { get; }
-        public T RateForDate { get; }
+        public T Result { get; }
         public string ErrorMessage { get; } = "";
         
-        private RateGetterResult(bool isSuccess, T rateForDate)
+        private RateGetterResult(bool isSuccess, T result)
         {
             IsSuccess = isSuccess;
-            RateForDate = rateForDate;
+            Result = result;
         }
 
         private RateGetterResult(bool isSuccess, string errorMessage)

@@ -1,6 +1,7 @@
 ﻿using System;
-using RateGetters.Currencies;
-using RateGetters.Currencies.Getters;
+using RateGetters.Rates;
+using RateGetters.Rates.Getters;
+using RateGetters.Rates.Interfaces;
 
 namespace CurrencyView
 {
@@ -9,20 +10,31 @@ namespace CurrencyView
         private static void Main(string[] args)
         {
             IRateGetter rateGetter = new CbrRateGetter();
-
+            
             var usdRateResultForToday = rateGetter.GetRate(DateTime.Now, CurrencyCodesEnum.Usd);
             var usdRateResultForJuly = rateGetter.GetRate(new DateTime(1021, 06, 1), CurrencyCodesEnum.Usd);
-            var usdRateResultForTomorrow = rateGetter.GetRate(DateTime.Now.AddDays(1), CurrencyCodesEnum.Usd);
+            var usdPeriodRateResult = rateGetter.GetRateForPeriod(
+                new DateTime(2021, 12, 01),
+                new DateTime(2022, 01, 04),
+                CurrencyCodesEnum.Usd);
             
             Console.WriteLine(usdRateResultForToday.IsSuccess
-                ? usdRateResultForToday.RateForDate
+                ? usdRateResultForToday.Result
                 : usdRateResultForToday.ErrorMessage);
             Console.WriteLine(usdRateResultForJuly.IsSuccess
-                ? usdRateResultForJuly.RateForDate
+                ? usdRateResultForJuly.Result
                 : usdRateResultForJuly.ErrorMessage);
-            Console.WriteLine(usdRateResultForTomorrow.IsSuccess
-                ? usdRateResultForTomorrow.RateForDate
-                : usdRateResultForTomorrow.ErrorMessage);
+
+            if (!usdPeriodRateResult.IsSuccess)
+            {
+                Console.WriteLine(usdPeriodRateResult.ErrorMessage);
+                return;
+            }
+
+            foreach (var rateForDate in usdPeriodRateResult.Result)
+            {
+                Console.WriteLine(rateForDate.ToString());
+            }
         }
     }
 }

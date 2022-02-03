@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace RateGetters.Currencies
+namespace RateGetters.Rates
 {
     public record RateForDate
     {
-        private DateTime DateTime { get; }
-        private CurrencyCodesEnum Code { get; }
-        private decimal Value { get; }
+        public DateTime DateTime { get; }
+        public CurrencyCodesEnum Code { get; }
+        public decimal Value { get; }
 
         public RateForDate(CurrencyCodesEnum code, DateTime dateTime, decimal value)
         {
@@ -24,9 +24,9 @@ namespace RateGetters.Currencies
 
     public enum CurrencyCodesEnum
     {
-        [Description("USD")]
+        [Description("R01235")]
         Usd,
-        [Description("EUR")]
+        [Description("R01239")]
         Eur
     }
 }
