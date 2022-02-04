@@ -11,11 +11,11 @@ namespace WebAPI.Endpoints.Rates.GetForPeriod
 {
     public class GetForPeriodEndpoint : EndpointBaseAsync
         .WithRequest<GetForPeriodRequest>
-        .WithResult<ActionResult<OperationResult<PeriodRateList>>>
+        .WithResult<ActionResult<PeriodRateList>>
     {
-        private readonly IRateGetter _rateGetter;
+        private readonly IRateService _rateService;
 
-        public GetForPeriodEndpoint(IRateGetter rateGetter) => _rateGetter = rateGetter;
+        public GetForPeriodEndpoint(IRateService rateService) => _rateService = rateService;
 
         [HttpGet("rates/period")]
         [SwaggerOperation(
@@ -23,13 +23,13 @@ namespace WebAPI.Endpoints.Rates.GetForPeriod
             Description = "Get currency rate for period",
             OperationId = "Rate.GetForPeriod",
             Tags = new[] {"RateEndpoint"})]
-        public override async Task<ActionResult<OperationResult<PeriodRateList>>> HandleAsync(
+        public override async Task<ActionResult<PeriodRateList>> HandleAsync(
             [FromQuery] GetForPeriodRequest request,
             CancellationToken cancellationToken = default)
         {
             return await Task.Run(
-                    () => new ActionResult<OperationResult<PeriodRateList>>(
-                        _rateGetter.GetRatesForPeriod(request.FirstDate, request.SecondDate, request.Code)),
+                    () => new ActionResult<PeriodRateList>(
+                        _rateService.GetRatesForPeriod(request.FirstDate, request.SecondDate, request.Code)),
                     cancellationToken)
                 .ConfigureAwait(false);
         }

@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RateGetters\RateGetters.csproj" />
+      <ProjectReference Include="..\RateServices\RateServices.csproj" />
     </ItemGroup>
 
 </Project>

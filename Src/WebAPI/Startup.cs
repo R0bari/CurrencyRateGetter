@@ -6,8 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using RateGetters.Rates.Getters;
 using RateGetters.Rates.Interfaces;
+using RateGetters.Rates.Services;
 using WebAPI.Infrastructure;
 
 namespace WebAPI
@@ -33,7 +33,7 @@ namespace WebAPI
                 c.EnableAnnotations();
                 c.SchemaFilter<EnumSchemaFilter>();
             });
-            services.AddTransient<IRateGetter, CbrRateGetter>();
+            services.AddTransient<IRateService, CbrRateService>();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

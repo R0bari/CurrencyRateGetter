@@ -1,9 +1,9 @@
 ﻿using Xunit;
 using System;
 using System.Threading.Tasks;
-using RateGetters.Rates.Getters;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
+using RateGetters.Rates.Services;
 using WebAPI.Endpoints.Rates.GetForDate;
 using WebAPI.Endpoints.Rates.GetForDateEndpoint;
 using WebAPI.Endpoints.Rates.GetForPeriod;
@@ -18,7 +18,7 @@ namespace WebAPI.Tests.Rates
 
         public RateTests()
         {
-            var rateGetter = new CbrRateGetter();
+            var rateGetter = new CbrRateService();
             _getForDateEndpoint = new GetForDateEndpoint(rateGetter);
             _getForPeriodEndpoint = new GetForPeriodEndpoint(rateGetter);
         }

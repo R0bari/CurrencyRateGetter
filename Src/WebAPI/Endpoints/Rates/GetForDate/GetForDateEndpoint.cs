@@ -13,9 +13,9 @@ namespace WebAPI.Endpoints.Rates.GetForDate
         .WithRequest<GetForDateRequest>
         .WithResult<ActionResult<RateForDate>>
     {
-        private readonly IRateGetter _rateGetter;
+        private readonly IRateService _rateService;
 
-        public GetForDateEndpoint(IRateGetter rateGetter) => _rateGetter = rateGetter;
+        public GetForDateEndpoint(IRateService rateService) => _rateService = rateService;
 
         [HttpGet("rates/date")]
         [SwaggerOperation(
@@ -29,7 +29,7 @@ namespace WebAPI.Endpoints.Rates.GetForDate
         {
             return await Task.Run(
                     () => new ActionResult<RateForDate>(
-                        _rateGetter.GetRate(request.DateTime, request.Code)),
+                        _rateService.GetRate(request.DateTime, request.Code)),
                     cancellationToken)
                 .ConfigureAwait(false);
         }

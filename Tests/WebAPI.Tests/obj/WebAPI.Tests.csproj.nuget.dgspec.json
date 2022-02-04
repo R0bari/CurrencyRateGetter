@@ -4,14 +4,14 @@
     "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Tests\\WebAPI.Tests\\WebAPI.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateGetters\\RateGetters.csproj": {
+    "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateGetters\\RateGetters.csproj",
-        "projectName": "RateGetters",
-        "projectPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateGetters\\RateGetters.csproj",
+        "projectUniqueName": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj",
+        "projectName": "RateServices",
+        "projectPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj",
         "packagesPath": "C:\\Users\\r0bar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateGetters\\obj\\",
+        "outputPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\r0bar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,8 +88,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateGetters\\RateGetters.csproj": {
-                "projectPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateGetters\\RateGetters.csproj"
+              "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj": {
+                "projectPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj"
               }
             }
           }

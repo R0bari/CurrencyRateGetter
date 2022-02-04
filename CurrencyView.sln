@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateGetters", "Src\RateGetters\RateGetters.csproj", "{4454CB56-B19E-40BA-9E37-F694F1063484}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateServices", "Src\RateServices\RateServices.csproj", "{4454CB56-B19E-40BA-9E37-F694F1063484}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "Src\WebAPI\WebAPI.csproj", "{C86BF3EE-C6FC-40E4-93B6-CE17E3CCAEE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateGetters.Tests", "Tests\RateGetters.Tests\RateGetters.Tests.csproj", "{79471C4E-2779-45AC-BE13-72562ABFB573}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateServices.Tests", "Tests\RateServices.Tests\RateServices.Tests.csproj", "{79471C4E-2779-45AC-BE13-72562ABFB573}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.Tests", "Tests\WebAPI.Tests\WebAPI.Tests.csproj", "{FDE21B6F-30F1-4F9D-ADD1-211B7B128C71}"
 EndProject
