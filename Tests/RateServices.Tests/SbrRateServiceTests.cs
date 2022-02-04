@@ -44,6 +44,32 @@ namespace RateGetters.Tests
         [Fact]
         public void TestSuccessfulCbrRateGetterPeriodResult()
         {
+            var first = new DateTime(2021, 12, 06);
+            var second = new DateTime(2021, 12, 01);
+            var expectedResult = new PeriodRateList(
+                new RateForDate[]
+                {
+                    new(
+                        new Rate(CurrencyCodesEnum.Usd, 74.8926m),
+                        second),
+                    new(
+                        new Rate(CurrencyCodesEnum.Usd, 73.9746m),
+                        second.AddDays(1)),
+                    new(
+                        new Rate(CurrencyCodesEnum.Usd, 74.0637m),
+                        second.AddDays(2)),
+                    new(
+                        new Rate(CurrencyCodesEnum.Usd, 73.7426m),
+                        second.AddDays(3))
+                });
+
+            var result = _rateService.GetRatesForPeriod(first, second, CurrencyCodesEnum.Usd);
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void TestSuccessfulCbrRateGetterPeriodResultWithHolidays()
+        {
             var periodStart = new DateTime(2021, 12, 01);
             var holidayDate = new DateTime(2022, 01, 04);
             var firstBeforeHolidayDate = new DateTime(2021, 12, 31);
