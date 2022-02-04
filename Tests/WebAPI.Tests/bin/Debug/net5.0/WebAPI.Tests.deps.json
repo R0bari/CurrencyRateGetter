@@ -1530,12 +1530,12 @@
           }
         }
       },
-      "RateGetters/1.0.0": {
+      "RateServices/1.0.0": {
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "17.0.0"
         },
         "runtime": {
-          "RateGetters.dll": {}
+          "RateServices.dll": {}
         }
       },
       "WebAPI/1.0.0": {
@@ -1544,7 +1544,7 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.3",
           "Microsoft.AspNetCore.Authentication.OpenIdConnect": "5.0.3",
           "Microsoft.Identity.Web": "1.1.0",
-          "RateGetters": "1.0.0",
+          "RateServices": "1.0.0",
           "Swashbuckle.AspNetCore": "5.6.3",
           "Swashbuckle.AspNetCore.Annotations": "6.2.3",
           "Swashbuckle.AspNetCore.Newtonsoft": "6.2.3"
@@ -2625,7 +2625,7 @@
       "path": "xunit.extensibility.execution/2.4.2-pre.12",
       "hashPath": "xunit.extensibility.execution.2.4.2-pre.12.nupkg.sha512"
     },
-    "RateGetters/1.0.0": {
+    "RateServices/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

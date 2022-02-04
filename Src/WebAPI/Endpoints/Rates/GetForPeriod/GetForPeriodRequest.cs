@@ -1,7 +1,7 @@
 ﻿using System;
 using RateGetters.Rates.Models.Enums;
 
-namespace WebAPI.Endpoints.Rates.GetForPeriodEndpoint
+namespace WebAPI.Endpoints.Rates.GetForPeriod
 {
     public class GetForPeriodRequest
     {
