@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
-using RateGetters.Rates.Getters;
 using RateGetters.Rates.Interfaces;
 using RateGetters.Rates.Models;
 using Swashbuckle.AspNetCore.Annotations;

@@ -1,0 +1,12 @@
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\bin\Debug\net5.0\CurrencierForRates.deps.json
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\bin\Debug\net5.0\CurrencierForRates.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\bin\Debug\net5.0\ref\CurrencierForRates.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\bin\Debug\net5.0\CurrencierForRates.pdb
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\obj\Debug\net5.0\CurrencierForRates.csprojAssemblyReference.cache
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\obj\Debug\net5.0\CurrencierForRates.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\obj\Debug\net5.0\CurrencierForRates.AssemblyInfoInputs.cache
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\obj\Debug\net5.0\CurrencierForRates.AssemblyInfo.cs
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\obj\Debug\net5.0\CurrencierForRates.csproj.CoreCompileInputs.cache
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\obj\Debug\net5.0\CurrencierForRates.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\obj\Debug\net5.0\ref\CurrencierForRates.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\CurrencierForRates\obj\Debug\net5.0\CurrencierForRates.pdb
