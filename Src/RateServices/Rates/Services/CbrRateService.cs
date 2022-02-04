@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
 using RateGetters.Infrastructure.Extensions;
 using RateGetters.Rates.Interfaces;
@@ -50,7 +49,7 @@ namespace RateGetters.Rates.Services
 
             return new RateForDate(
                 new Rate(CurrencyCodesEnum.None, 0m),
-                DateTime.MinValue);;
+                DateTime.MinValue);
         }
 
         public PeriodRateList GetRatesForPeriod(DateTime first, DateTime second,
@@ -74,15 +73,6 @@ namespace RateGetters.Rates.Services
             return currency?.Rows is null
                 ? new PeriodRateList(new List<RateForDate>())
                 : PeriodRateList.Prepare(currency, code);
-        }
-
-        private static IEnumerable<RateForDate> PrepareRateList(DataTable currency, CurrencyCodesEnum code)
-        {
-            return currency.Rows
-                .Cast<DataRow>()
-                .Select(row => new RateForDate(
-                    new Rate(code, Convert.ToDecimal(row["Value"])),
-                    Convert.ToDateTime(row["Date"])));
         }
     }
 }

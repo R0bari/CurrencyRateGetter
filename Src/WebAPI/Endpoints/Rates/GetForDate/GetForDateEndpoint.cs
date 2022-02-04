@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using RateGetters.Rates.Interfaces;
 using RateGetters.Rates.Models;
 using Swashbuckle.AspNetCore.Annotations;
-using WebAPI.Endpoints.Rates.GetForDateEndpoint;
 
 namespace WebAPI.Endpoints.Rates.GetForDate
 {

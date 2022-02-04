@@ -8,11 +8,11 @@ using RateGetters.Rates.Services;
 
 namespace RateGetters.Tests
 {
-    public class RateGetterTests
+    public class SbrRateServiceTests
     {
         private readonly IRateService _rateService;
 
-        public RateGetterTests()
+        public SbrRateServiceTests()
         {
             _rateService = new CbrRateService();
         }

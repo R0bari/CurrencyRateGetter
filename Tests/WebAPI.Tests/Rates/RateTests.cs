@@ -5,9 +5,7 @@ using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 using RateGetters.Rates.Services;
 using WebAPI.Endpoints.Rates.GetForDate;
-using WebAPI.Endpoints.Rates.GetForDateEndpoint;
 using WebAPI.Endpoints.Rates.GetForPeriod;
-using WebAPI.Endpoints.Rates.GetForPeriodEndpoint;
 
 namespace WebAPI.Tests.Rates
 {
