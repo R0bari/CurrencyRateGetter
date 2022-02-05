@@ -10,7 +10,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace WebAPI.Endpoints.Rates.GetForDate
 {
-    public class GetForDateEndpoint : EndpointBaseAsync.WithRequest<GetForDateSpecification>.WithResult<RateForDate>
+    public class GetForDateEndpoint : EndpointBaseAsync
+        .WithRequest<GetForDateSpecification>
+        .WithResult<RateForDate>
     {
         private readonly IMediator _mediator;
 

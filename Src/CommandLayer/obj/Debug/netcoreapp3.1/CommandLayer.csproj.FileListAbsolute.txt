@@ -1,0 +1,15 @@
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\bin\Debug\netcoreapp3.1\testhost.exe
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\bin\Debug\netcoreapp3.1\testhost.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.PlatformAbstractions.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\bin\Debug\netcoreapp3.1\CommandLayer.deps.json
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\bin\Debug\netcoreapp3.1\CommandLayer.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\bin\Debug\netcoreapp3.1\CommandLayer.pdb
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\bin\Debug\netcoreapp3.1\RateServices.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\bin\Debug\netcoreapp3.1\RateServices.pdb
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\obj\Debug\netcoreapp3.1\CommandLayer.csprojAssemblyReference.cache
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\obj\Debug\netcoreapp3.1\CommandLayer.AssemblyInfoInputs.cache
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\obj\Debug\netcoreapp3.1\CommandLayer.AssemblyInfo.cs
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\obj\Debug\netcoreapp3.1\CommandLayer.csproj.CoreCompileInputs.cache
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\obj\Debug\netcoreapp3.1\CommandLayer.csproj.CopyComplete
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\obj\Debug\netcoreapp3.1\CommandLayer.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\Src\CommandLayer\obj\Debug\netcoreapp3.1\CommandLayer.pdb

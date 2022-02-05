@@ -1,39 +1,39 @@
 ﻿using Xunit;
-using Moq;
-using MediatR;
 using System;
-using System.Threading;
+using System.Net.Http;
 using System.Threading.Tasks;
-using CommandLayer.Queries.Rates.GetForDateQuery;
-using CommandLayer.Queries.Rates.GetForPeriodQuery;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using Newtonsoft.Json;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
-using RateGetters.Rates.Services;
-using RateGetters.Rates.Services.Interfaces;
-using WebAPI.Endpoints.Rates.GetForDate;
-using WebAPI.Endpoints.Rates.GetForPeriod;
 
 namespace WebAPI.Tests.Rates
 {
     public class RateTests
     {
-        private readonly GetForDateEndpoint _getForDateEndpoint;
-        private readonly GetForPeriodEndpoint _getForPeriodEndpoint;
+        private readonly HttpClient _client;
 
-        public RateTests()
-        {
-            var mediatorMock = PrepareMediatorMock(new CbrRateService());
-            _getForDateEndpoint = new GetForDateEndpoint(mediatorMock.Object);
-            _getForPeriodEndpoint = new GetForPeriodEndpoint(mediatorMock.Object);
-        }
+        public RateTests() =>
+            _client = new TestServer(
+                new WebHostBuilder()
+                    .UseEnvironment("Development")
+                    .UseStartup<Startup>())
+                .CreateClient();
 
         [Fact]
         public async Task TestGetForDate()
         {
             var date = new DateTime(2022, 02, 04);
-            var result = await _getForDateEndpoint
-                .HandleAsync(new GetForDateSpecification(date, CurrencyCodesEnum.Eur))
-                .ConfigureAwait(false);
+
+            var request = new HttpRequestMessage(
+                new HttpMethod("GET"),
+                $"https://localhost:44322/rates/date" +
+                $"?Code={CurrencyCodesEnum.Eur}" +
+                $"&DateTime={date:yyyy.MM.dd}");
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            var result = JsonConvert.DeserializeObject<RateForDate>(await response.Content.ReadAsStringAsync());
 
             Assert.Equal(
                 new RateForDate(
@@ -64,37 +64,17 @@ namespace WebAPI.Tests.Rates
                         second.AddDays(3))
                 });
 
-            var result = await _getForPeriodEndpoint
-                .HandleAsync(new GetForPeriodSpecification(CurrencyCodesEnum.Usd, first, second))
-                .ConfigureAwait(false);
+            var request = new HttpRequestMessage(
+                new HttpMethod("GET"),
+                $"https://localhost:44322/rates/period" +
+                $"?Code={CurrencyCodesEnum.Usd}" +
+                $"&FirstDate={first:yyyy.MM.dd}" +
+                $"&SecondDate={second:yyyy.MM.dd}");
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            var result = JsonConvert.DeserializeObject<PeriodRateList>(await response.Content.ReadAsStringAsync());
 
             Assert.Equal(expectedResult, result);
-        }
-
-        private static Mock<IMediator> PrepareMediatorMock(IRateService rateService)
-        {
-            var mediator = new Mock<IMediator>();
-            mediator
-                .Setup(m => m.Send(
-                    It.IsAny<GetForDateQuery>(),
-                    It.IsAny<CancellationToken>()))
-                .Returns((GetForDateQuery query, CancellationToken token) =>
-                    Task.FromResult(
-                        rateService.GetRate(
-                            query.Specification.DateTime,
-                            query.Specification.Code)));
-            mediator
-                .Setup(m => m.Send(
-                    It.IsAny<GetForPeriodQuery>(),
-                    It.IsAny<CancellationToken>()))
-                .Returns((GetForPeriodQuery query, CancellationToken token) =>
-                    Task.FromResult(
-                        rateService.GetRatesForPeriod(
-                            query.Specification.FirstDate,
-                            query.Specification.SecondDate,
-                            query.Specification.Code)));
-            
-            return mediator;
         }
     }
 }

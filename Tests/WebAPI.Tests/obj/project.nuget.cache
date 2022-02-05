@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MwEYxaH9HzceKtAKIbOeRhoIYQbqO/kM+hieS4OFVWo2I7KjLSlXofdV1HKGXOkf7T2YgaqJ+KO3WkkkZ487fQ==",
+  "dgSpecHash": "OBoeM6YCwpnO848EGTxr4CZSbd8nMv8uLO4iq2jY8k5l6jbwRPVEJIZBS1cdj8EDodbAbRgOyVhFHcVAhIayDQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Tests\\WebAPI.Tests\\WebAPI.Tests.csproj",
   "expectedPackageFiles": [
@@ -33,6 +33,7 @@
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.aspnetcore.responsecaching.abstractions\\2.1.0\\microsoft.aspnetcore.responsecaching.abstractions.2.1.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.aspnetcore.routing\\2.1.0\\microsoft.aspnetcore.routing.2.1.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.aspnetcore.routing.abstractions\\2.1.0\\microsoft.aspnetcore.routing.abstractions.2.1.0.nupkg.sha512",
+    "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.aspnetcore.testhost\\5.0.13\\microsoft.aspnetcore.testhost.5.0.13.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.1.0\\microsoft.aspnetcore.webutilities.2.1.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.0.0\\microsoft.bcl.asyncinterfaces.1.0.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.codecoverage\\17.0.0\\microsoft.codecoverage.17.0.0.nupkg.sha512",
@@ -117,6 +118,7 @@
     "C:\\Users\\r0bar\\.nuget\\packages\\system.io.compression.zipfile\\4.3.0\\system.io.compression.zipfile.4.3.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\system.io.filesystem\\4.3.0\\system.io.filesystem.4.3.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\r0bar\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\system.linq.expressions\\4.3.0\\system.linq.expressions.4.3.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",

@@ -140,3 +140,5 @@ C:\Users\r0bar\RiderProjects\CurrencyView\Tests\WebAPI.Tests\bin\Debug\net5.0\Co
 C:\Users\r0bar\RiderProjects\CurrencyView\Tests\WebAPI.Tests\bin\Debug\net5.0\CommandLayer.pdb
 C:\Users\r0bar\RiderProjects\CurrencyView\Tests\WebAPI.Tests\bin\Debug\net5.0\Castle.Core.dll
 C:\Users\r0bar\RiderProjects\CurrencyView\Tests\WebAPI.Tests\bin\Debug\net5.0\Moq.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\Tests\WebAPI.Tests\bin\Debug\net5.0\Microsoft.AspNetCore.TestHost.dll
+C:\Users\r0bar\RiderProjects\CurrencyView\Tests\WebAPI.Tests\bin\Debug\net5.0\System.IO.Pipelines.dll
