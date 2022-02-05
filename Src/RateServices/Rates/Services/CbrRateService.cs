@@ -56,16 +56,10 @@ namespace RateGetters.Rates.Services
             CurrencyCodesEnum code)
         {
             var ds = new DataSet();
-            var periodStartInRequiredFormat = (first < second ? first : second)
-                .ToShortDateString()
-                .Replace('.', '/');
-            var periodEndInRequiredFormat = (first > second ? first : second)
-                .ToShortDateString()
-                .Replace('.', '/');
 
             var request = $"{CbrLinkForPeriod}" +
-                          $"?date_req1={periodStartInRequiredFormat}" +
-                          $"&date_req2={periodEndInRequiredFormat}" +
+                          $"?date_req1={(first < second ? first : second):dd/MM/yyyy}" +
+                          $"&date_req2={(first > second ? first : second):dd/MM/yyyy}" +
                           $"&VAL_NM_RQ={code.Description()}";
             ds.ReadXml(request);
 
