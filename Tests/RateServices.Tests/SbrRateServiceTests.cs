@@ -1,10 +1,10 @@
-using Xunit;
 using System;
 using System.Linq;
-using RateGetters.Rates.Interfaces;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 using RateGetters.Rates.Services;
+using RateGetters.Rates.Services.Interfaces;
+using Xunit;
 
 namespace RateGetters.Tests
 {

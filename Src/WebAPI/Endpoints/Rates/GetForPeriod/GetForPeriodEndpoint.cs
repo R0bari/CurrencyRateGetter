@@ -1,20 +1,22 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
+using CommandLayer.Queries.Rates.GetForPeriodQuery;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RateGetters.Rates.Interfaces;
 using RateGetters.Rates.Models;
+using RateGetters.Rates.Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace WebAPI.Endpoints.Rates.GetForPeriod
 {
     public class GetForPeriodEndpoint : EndpointBaseAsync
-        .WithRequest<GetForPeriodRequest>
-        .WithResult<ActionResult<PeriodRateList>>
+        .WithRequest<GetForPeriodSpecification>
+        .WithResult<PeriodRateList>
     {
-        private readonly IRateService _rateService;
+        private readonly IMediator _mediator;
 
-        public GetForPeriodEndpoint(IRateService rateService) => _rateService = rateService;
+        public GetForPeriodEndpoint(IMediator mediator) => _mediator = mediator;
 
         [HttpGet("rates/period")]
         [SwaggerOperation(
@@ -22,15 +24,12 @@ namespace WebAPI.Endpoints.Rates.GetForPeriod
             Description = "Get currency rate for period",
             OperationId = "Rate.GetForPeriod",
             Tags = new[] {"RateEndpoint"})]
-        public override async Task<ActionResult<PeriodRateList>> HandleAsync(
-            [FromQuery] GetForPeriodRequest request,
-            CancellationToken cancellationToken = default)
-        {
-            return await Task.Run(
-                    () => new ActionResult<PeriodRateList>(
-                        _rateService.GetRatesForPeriod(request.FirstDate, request.SecondDate, request.Code)),
+        public override async Task<PeriodRateList> HandleAsync(
+            [FromQuery] GetForPeriodSpecification specification,
+            CancellationToken cancellationToken = default) =>
+            await _mediator.Send(
+                    new GetForPeriodQuery(specification),
                     cancellationToken)
                 .ConfigureAwait(false);
-        }
     }
 }

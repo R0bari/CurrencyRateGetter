@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using RateGetters.Infrastructure.Extensions;
-using RateGetters.Rates.Interfaces;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
+using RateGetters.Rates.Services.Interfaces;
 
 namespace RateGetters.Rates.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace RateGetters.Rates.Interfaces
+﻿namespace RateGetters.Rates.Services.Interfaces
 {
     public interface IRateService : ISingleRateService, IPeriodRateService
     {

@@ -4,6 +4,70 @@
     "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Tests\\WebAPI.Tests\\WebAPI.Tests.csproj": {}
   },
   "projects": {
+    "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\CommandLayer\\CommandLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\CommandLayer\\CommandLayer.csproj",
+        "projectName": "CommandLayer",
+        "projectPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\CommandLayer\\CommandLayer.csproj",
+        "packagesPath": "C:\\Users\\r0bar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\CommandLayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\r0bar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj": {
+                "projectPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -13,18 +77,24 @@
         "packagesPath": "C:\\Users\\r0bar\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\obj\\",
         "projectStyle": "PackageReference",
+        "crossTargeting": true,
         "configFilePaths": [
           "C:\\Users\\r0bar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net5.0",
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          },
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {}
@@ -37,6 +107,31 @@
         }
       },
       "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        },
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
@@ -88,8 +183,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj": {
-                "projectPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj"
+              "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\CommandLayer\\CommandLayer.csproj": {
+                "projectPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\CommandLayer\\CommandLayer.csproj"
               }
             }
           }
@@ -198,6 +293,10 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.0.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.16.1, )"
             },
             "xunit": {
               "target": "Package",

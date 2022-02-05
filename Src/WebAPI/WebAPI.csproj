@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RateServices\RateServices.csproj" />
+      <ProjectReference Include="..\CommandLayer\CommandLayer.csproj" />
     </ItemGroup>
 
 </Project>

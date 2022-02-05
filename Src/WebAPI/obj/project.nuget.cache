@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sTOFQrUvKeZ+RVVyG+CFYfG0Rmjkoz1qY1pmARrFTzoyPUn8n6U9ugdPdy4EBFEqELFryYf/ZjEQxjA5Frud4w==",
+  "dgSpecHash": "nbUfb/Tj9JCu0SSJ5MXxy0B96g2WXQxB4rwIctn10zPjYXtNj7UmhySW00Sb0ueaNIsjQ1JtMbjhSFnczwTCRw==",
   "success": true,
   "projectFilePath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,9 @@
     "C:\\Users\\r0bar\\.nuget\\packages\\azure.identity\\1.2.3\\azure.identity.1.2.3.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\azure.security.keyvault.certificates\\4.1.0\\azure.security.keyvault.certificates.4.1.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\azure.security.keyvault.secrets\\4.1.0\\azure.security.keyvault.secrets.4.1.0.nupkg.sha512",
+    "C:\\Users\\r0bar\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
+    "C:\\Users\\r0bar\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\r0bar\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.1.0\\microsoft.aspnetcore.authentication.abstractions.2.1.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.1.0\\microsoft.aspnetcore.authentication.core.2.1.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.3\\microsoft.aspnetcore.authentication.jwtbearer.5.0.3.nupkg.sha512",
@@ -37,7 +40,7 @@
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\2.1.0\\microsoft.extensions.configuration.abstractions.2.1.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\2.1.0\\microsoft.extensions.dependencyinjection.2.1.0.nupkg.sha512",
-    "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
+    "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.extensions.dependencymodel\\2.1.0\\microsoft.extensions.dependencymodel.2.1.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\2.1.0\\microsoft.extensions.fileproviders.abstractions.2.1.0.nupkg.sha512",
     "C:\\Users\\r0bar\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\2.1.0\\microsoft.extensions.hosting.abstractions.2.1.0.nupkg.sha512",

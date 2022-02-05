@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {
+    ".NETCoreApp,Version=v3.1": {
       "Microsoft.CodeCoverage/17.0.0": {
         "type": "package",
         "compile": {
@@ -1659,7 +1659,7 @@
       },
       "RateServices/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "17.0.0"
         },
@@ -5892,7 +5892,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net5.0": [
+    ".NETCoreApp,Version=v3.1": [
       "RateServices >= 1.0.0",
       "xunit >= 2.4.2-pre.12"
     ]
@@ -5914,15 +5914,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0"
+        "netcoreapp3.1"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
             "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj": {
               "projectPath": "C:\\Users\\r0bar\\RiderProjects\\CurrencyView\\Src\\RateServices\\RateServices.csproj"
@@ -5937,8 +5937,8 @@
       }
     },
     "frameworks": {
-      "net5.0": {
-        "targetAlias": "net5.0",
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "xunit": {
             "target": "Package",

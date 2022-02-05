@@ -1,17 +1,17 @@
 ﻿using System;
 using RateGetters.Rates.Models.Enums;
 
-namespace WebAPI.Endpoints.Rates.GetForPeriod
+namespace CommandLayer.Queries.Rates.GetForPeriodQuery
 {
-    public class GetForPeriodRequest
+    public class GetForPeriodSpecification
     {
         public CurrencyCodesEnum Code { get; set; }
         public DateTime FirstDate { get; set; }
         public DateTime SecondDate { get; set; }
         
-        public GetForPeriodRequest() {}
+        public GetForPeriodSpecification() {}
 
-        public GetForPeriodRequest(CurrencyCodesEnum code, DateTime firstDate, DateTime secondDate) =>
+        public GetForPeriodSpecification(CurrencyCodesEnum code, DateTime firstDate, DateTime secondDate) =>
             (Code, FirstDate, SecondDate) = (code, firstDate, secondDate);
     }
 }

@@ -2,7 +2,7 @@
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 
-namespace RateGetters.Rates.Interfaces
+namespace RateGetters.Rates.Services.Interfaces
 {
     public interface ISingleRateService
     {

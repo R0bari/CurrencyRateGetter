@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateServices.Tests", "Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.Tests", "Tests\WebAPI.Tests\WebAPI.Tests.csproj", "{FDE21B6F-30F1-4F9D-ADD1-211B7B128C71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLayer", "Src\CommandLayer\CommandLayer.csproj", "{89985DD8-8F36-411B-B048-AB2638D97BED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{FDE21B6F-30F1-4F9D-ADD1-211B7B128C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDE21B6F-30F1-4F9D-ADD1-211B7B128C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDE21B6F-30F1-4F9D-ADD1-211B7B128C71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89985DD8-8F36-411B-B048-AB2638D97BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89985DD8-8F36-411B-B048-AB2638D97BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89985DD8-8F36-411B-B048-AB2638D97BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89985DD8-8F36-411B-B048-AB2638D97BED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

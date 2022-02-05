@@ -1,3 +1,6 @@
+using System.Reflection;
+using CommandLayer.DependencyInjection;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,8 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using RateGetters.Rates.Interfaces;
 using RateGetters.Rates.Services;
+using RateGetters.Rates.Services.Interfaces;
 using WebAPI.Infrastructure;
 
 namespace WebAPI
@@ -33,7 +36,7 @@ namespace WebAPI
                 c.EnableAnnotations();
                 c.SchemaFilter<EnumSchemaFilter>();
             });
-            services.AddTransient<IRateService, CbrRateService>();
+            services.AddCommandLayerServices();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
