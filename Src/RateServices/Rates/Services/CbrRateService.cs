@@ -22,10 +22,7 @@ namespace RateGetters.Rates.Services
         public RateForDate GetRate(DateTime dateTime, CurrencyCodesEnum code)
         {
             var ds = new DataSet();
-            var dateInRequiredFormat = dateTime
-                .ToShortDateString()
-                .Replace('.', '/');
-            ds.ReadXml($"{CbrLinkForSingle}?date_req={dateInRequiredFormat}");
+            ds.ReadXml($"{CbrLinkForSingle}?date_req={dateTime:dd/MM/yyyy}");
 
             var currencyRows = ds.Tables["Valute"]?.Rows;
             if (currencyRows is null)
