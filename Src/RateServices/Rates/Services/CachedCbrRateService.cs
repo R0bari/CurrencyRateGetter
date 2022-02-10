@@ -45,9 +45,11 @@ namespace RateGetters.Rates.Services
 
         public PeriodRateList GetRatesForPeriod(DateTime first, DateTime second, CurrencyCodesEnum code)
         {
-            if (_cache.TryGetValue((first, second), out PeriodRateList periodRateList)
-                ||
-                _cache.TryGetValue((second, first), out periodRateList))
+            if (_cache.TryGetValue(
+                first < second
+                    ? (first, second)
+                    : (second, first),
+                out PeriodRateList periodRateList))
             {
                 return periodRateList;
             }
