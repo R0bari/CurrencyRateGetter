@@ -14,29 +14,23 @@ namespace RateGetters.Rates.Models
 
         public PeriodRateList(IEnumerable<RateForDate> list) => _list = list;
 
-        public static PeriodRateList Prepare(DataTable currency, CurrencyCodesEnum code)
-        {
-            return new(currency.Rows
+        public static PeriodRateList Prepare(DataTable currency, CurrencyCodesEnum code) =>
+            new(currency.Rows
                 .Cast<DataRow>()
                 .Select(row => new RateForDate(
                     new Rate(code, Convert.ToDecimal(row["Value"])),
                     Convert.ToDateTime(row["Date"]))));
-        }
 
-        public override string ToString()
-        {
-            return Strings.Join(
+        public override string ToString() =>
+            Strings.Join(
                 _list.Select(el => el.ToString())
                     .ToArray(),
                 "\n");
-        }
 
-        public override bool Equals(object obj)
-        {
-            return (obj is PeriodRateList) is not false
-                   &&
-                   Equals((PeriodRateList) obj);
-        }
+        public override bool Equals(object obj) =>
+            (obj is PeriodRateList) is not false
+            &&
+            Equals((PeriodRateList) obj);
 
         private bool Equals(PeriodRateList other)
         {
@@ -49,19 +43,10 @@ namespace RateGetters.Rates.Models
                        .All(index => list[index] == secondList[index]);
         }
 
-        public override int GetHashCode()
-        {
-            return _list != null ? _list.GetHashCode() : 0;
-        }
+        public override int GetHashCode() => _list != null ? _list.GetHashCode() : 0;
 
-        public IEnumerator<RateForDate> GetEnumerator()
-        {
-            return _list.GetEnumerator();
-        }
+        public IEnumerator<RateForDate> GetEnumerator() => _list.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
