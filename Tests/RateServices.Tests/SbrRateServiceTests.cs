@@ -1,9 +1,10 @@
+using Xunit;
 using System;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 using RateGetters.Rates.Services;
 using RateGetters.Rates.Services.Interfaces;
-using Xunit;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace RateGetters.Tests
 {
@@ -11,7 +12,11 @@ namespace RateGetters.Tests
     {
         private readonly IRateService _rateService;
 
-        public SbrRateServiceTests() => _rateService = new CbrRateService();
+        public SbrRateServiceTests() =>
+            _rateService =
+                new CachedCbrRateService(
+                    new MemoryCache(
+                        new MemoryCacheOptions()));
 
         [Theory]
         [InlineData(76.4849, CurrencyCodesEnum.Usd, 2022, 02, 03)]
