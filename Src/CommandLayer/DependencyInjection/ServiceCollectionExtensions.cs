@@ -11,7 +11,7 @@ namespace CommandLayer.DependencyInjection
         public static void AddCommandLayerServices(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddTransient<IRateService, CbrRateService>();
+            services.AddTransient<IRateService, CachedCbrRateService>();
         }
     }
 }

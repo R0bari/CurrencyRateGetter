@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Extensions.Caching.Memory;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 using RateGetters.Rates.Services;
@@ -11,32 +12,36 @@ namespace RateGetters.Tests
     {
         private readonly IRateService _rateService;
 
-        public SbrRateServiceTests() => _rateService = new CbrRateService();
+        public SbrRateServiceTests() =>
+            _rateService =
+                new CachedCbrRateService(
+                    new MemoryCache(
+                        new MemoryCacheOptions()));
 
         [Theory]
         [InlineData(76.4849, CurrencyCodesEnum.Usd, 2022, 02, 03)]
         [InlineData(86.2826, CurrencyCodesEnum.Eur, 2022, 02, 03)]
-        public void TestCurrenciesRates(decimal expectedValue, CurrencyCodesEnum code, int year, int month, int day) =>
+        public async void TestCurrenciesRates(decimal expectedValue, CurrencyCodesEnum code, int year, int month, int day) =>
             Assert.Equal(
                 new RateForDate(
                     new Rate(code, expectedValue),
                     new DateTime(year, month, day)),
-                _rateService.GetRate(
+                await _rateService.GetRateAsync(
                     new DateTime(year, month, day),
                     code));
 
         [Fact]
-        public void TestFailedCbrRateGetterSingleResult() =>
+        public async void TestFailedCbrRateGetterSingleResult() =>
             Assert.Equal(
                 new RateForDate(
                     new Rate(CurrencyCodesEnum.None, 0m),
                     DateTime.MinValue),
-                _rateService.GetRate(
+                await _rateService.GetRateAsync(
                     new DateTime(1021, 06, 1),
                     CurrencyCodesEnum.Eur));
 
         [Fact]
-        public void TestSuccessfulCbrRateGetterPeriodResult() =>
+        public async void TestSuccessfulCbrRateGetterPeriodResult() =>
             Assert.Equal(
                 new PeriodRateList(
                     new RateForDate[]
@@ -54,13 +59,13 @@ namespace RateGetters.Tests
                             new Rate(CurrencyCodesEnum.Usd, 73.7426m),
                             new DateTime(2021, 12, 04))
                     }),
-                _rateService.GetRatesForPeriod(
+                await _rateService.GetRatesForPeriodAsync(
                     new DateTime(2021, 12, 01),
                     new DateTime(2021, 12, 06),
                     CurrencyCodesEnum.Usd));
 
         [Fact]
-        public void TestSuccessfulCbrRateGetterPeriodResultWithHolidays() =>
+        public async void TestSuccessfulCbrRateGetterPeriodResultWithHolidays() =>
             Assert.Equal(
                 new PeriodRateList(
                     new RateForDate[]
@@ -78,7 +83,7 @@ namespace RateGetters.Tests
                             new Rate(CurrencyCodesEnum.Usd, 73.7426m),
                             new DateTime(2021, 12, 04))
                     }),
-                _rateService.GetRatesForPeriod(
+                await _rateService.GetRatesForPeriodAsync(
                     new DateTime(2021, 12, 01),
                     new DateTime(2021, 12, 06),
                     CurrencyCodesEnum.Usd));

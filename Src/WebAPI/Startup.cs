@@ -33,6 +33,7 @@ namespace WebAPI
                 c.SchemaFilter<EnumSchemaFilter>();
             });
             services.AddCommandLayerServices();
+            services.AddMemoryCache();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

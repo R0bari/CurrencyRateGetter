@@ -13,10 +13,9 @@ namespace CommandLayer.Queries.Rates.GetForDateQuery
         public GetForDateHandler(IRateService rateService) => _rateService = rateService;
         
         public async Task<RateForDate> Handle(GetForDateQuery request, CancellationToken cancellationToken) =>
-            await Task
-                .Run(
-                    () => _rateService.GetRate(request.Specification.DateTime, request.Specification.Code),
-                    cancellationToken)
+            await _rateService.GetRateAsync(
+                        request.Specification.DateTime,
+                        request.Specification.Code)
                 .ConfigureAwait(false);
     }
 }

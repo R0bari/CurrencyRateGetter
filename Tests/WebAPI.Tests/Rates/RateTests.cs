@@ -22,53 +22,66 @@ namespace WebAPI.Tests.Rates
                 .CreateClient();
 
         [Fact]
-        public async Task TestGetForDate() =>
-            Assert.Equal(
-                new RateForDate(
-                    new Rate(CurrencyCodesEnum.Eur, 86.561m),
-                    new DateTime(2022, 02, 04)),
-                JsonConvert.DeserializeObject<RateForDate>(
-                    await (await _client.SendAsync(
-                            new HttpRequestMessage(
-                                new HttpMethod("GET"),
-                                $"https://localhost:44322/rates/date" +
-                                $"?Code={CurrencyCodesEnum.Eur}" +
-                                $"&DateTime={new DateTime(2022, 02, 04):yyyy.MM.dd}"))
-                            .ConfigureAwait(false))
-                        .Content
-                        .ReadAsStringAsync()
-                        .ConfigureAwait(false)));
+        public async Task TestGetForDate()
+        {
+            var expected = new RateForDate(
+                new Rate(CurrencyCodesEnum.Eur, 86.561m),
+                new DateTime(2022, 02, 04));
+
+            var actual = JsonConvert.DeserializeObject<RateForDate>(
+                await GetContentFromResponse(
+                    await SendRequest(
+                        HttpMethod.Get,
+                        $"https://localhost:44322/rates/date" +
+                        $"?Code={CurrencyCodesEnum.Eur}" +
+                        $"&DateTime={new DateTime(2022, 02, 04):yyyy.MM.dd}")));
+
+            Assert.Equal(expected, actual);
+        }
 
         [Fact]
-        public async Task TestGetForPeriod() =>
-            Assert.Equal(
-                new PeriodRateList(
-                    new RateForDate[]
-                    {
-                        new(
-                            new Rate(CurrencyCodesEnum.Usd, 74.8926m),
-                            new DateTime(2021, 12, 01)),
-                        new(
-                            new Rate(CurrencyCodesEnum.Usd, 73.9746m),
-                            new DateTime(2021, 12, 02)),
-                        new(
-                            new Rate(CurrencyCodesEnum.Usd, 74.0637m),
-                            new DateTime(2021, 12, 03)),
-                        new(
-                            new Rate(CurrencyCodesEnum.Usd, 73.7426m),
-                            new DateTime(2021, 12, 04))
-                    }),
-                JsonConvert.DeserializeObject<PeriodRateList>(
-                    await (await _client.SendAsync(
-                                new HttpRequestMessage(
-                                    new HttpMethod("GET"),
-                                    $"https://localhost:44322/rates/period" +
-                                    $"?Code={CurrencyCodesEnum.Usd}" +
-                                    $"&FirstDate={new DateTime(2021, 12, 01):yyyy.MM.dd}" +
-                                    $"&SecondDate={new DateTime(2021, 12, 06):yyyy.MM.dd}"))
-                            .ConfigureAwait(false))
-                        .Content
-                        .ReadAsStringAsync()
-                        .ConfigureAwait(false)));
+        public async Task TestGetForPeriod()
+        {
+            var expected = new PeriodRateList(
+                new RateForDate[]
+                {
+                    new(
+                        new Rate(CurrencyCodesEnum.Usd, 74.8926m),
+                        new DateTime(2021, 12, 01)),
+                    new(
+                        new Rate(CurrencyCodesEnum.Usd, 73.9746m),
+                        new DateTime(2021, 12, 02)),
+                    new(
+                        new Rate(CurrencyCodesEnum.Usd, 74.0637m),
+                        new DateTime(2021, 12, 03)),
+                    new(
+                        new Rate(CurrencyCodesEnum.Usd, 73.7426m),
+                        new DateTime(2021, 12, 04))
+                });
+
+            var actual = JsonConvert.DeserializeObject<PeriodRateList>(
+                await GetContentFromResponse(
+                    await SendRequest(
+                        HttpMethod.Get,
+                        $"https://localhost:44322/rates/period" +
+                        $"?Code={CurrencyCodesEnum.Usd}" +
+                        $"&FirstDate={new DateTime(2021, 12, 01):yyyy.MM.dd}" +
+                        $"&SecondDate={new DateTime(2021, 12, 06):yyyy.MM.dd}")));
+
+            Assert.Equal(expected, actual);
+        }
+
+        private async Task<HttpResponseMessage> SendRequest(HttpMethod method, string requestUri)
+        {
+            using var request = new HttpRequestMessage(method, requestUri);
+            using var response = _client.SendAsync(request);
+            return await response.ConfigureAwait(false);
+        }
+
+        private static async Task<string> GetContentFromResponse(HttpResponseMessage responseMessage) =>
+            await responseMessage
+                .Content
+                .ReadAsStringAsync()
+                .ConfigureAwait(false);
     }
 }
