@@ -29,11 +29,11 @@ namespace WebAPI.Tests.Rates
                     new DateTime(2022, 02, 04)),
                 JsonConvert.DeserializeObject<RateForDate>(
                     await (await _client.SendAsync(
-                            new HttpRequestMessage(
-                                new HttpMethod("GET"),
-                                $"https://localhost:44322/rates/date" +
-                                $"?Code={CurrencyCodesEnum.Eur}" +
-                                $"&DateTime={new DateTime(2022, 02, 04):yyyy.MM.dd}"))
+                                new HttpRequestMessage(
+                                    new HttpMethod("GET"),
+                                    $"https://localhost:44322/rates/date" +
+                                    $"?Code={CurrencyCodesEnum.Eur}" +
+                                    $"&DateTime={new DateTime(2022, 02, 04):yyyy.MM.dd}"))
                             .ConfigureAwait(false))
                         .Content
                         .ReadAsStringAsync()

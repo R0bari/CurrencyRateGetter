@@ -1,13 +1,10 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using RateGetters.Rates.Models;
+using RateGetters.Rates.Models.Enums;
 
 namespace CommandLayer.Queries.Rates.GetForDateQuery
 {
-    public class GetForDateQuery : IRequest<RateForDate>
-    {
-        public GetForDateSpecification Specification { get; set; }
-
-        public GetForDateQuery(GetForDateSpecification specification) =>
-            Specification = specification;
-    }
+    public record GetForDateSpecification(CurrencyCodesEnum Code, DateTime DateTime);
+    public record GetForDateQuery(GetForDateSpecification Specification) : IRequest<RateForDate>;
 }
