@@ -21,6 +21,7 @@ namespace RateGetters.Tests
         [Theory]
         [InlineData(76.4849, CurrencyCodesEnum.Usd, 2022, 02, 03)]
         [InlineData(86.2826, CurrencyCodesEnum.Eur, 2022, 02, 03)]
+        [InlineData(1, CurrencyCodesEnum.Rub, 2022, 02, 03)]
         public async void TestCurrenciesRates(decimal expectedValue, CurrencyCodesEnum code, int year, int month, int day) =>
             Assert.Equal(
                 new RateForDate(

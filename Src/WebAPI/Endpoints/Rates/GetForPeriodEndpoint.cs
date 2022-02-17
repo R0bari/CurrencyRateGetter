@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
-using CommandLayer.Queries.Rates.GetForPeriodQuery;
+using CommandLayer.Queries.Currencies.Rates.GetForPeriodQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RateGetters.Rates.Models;

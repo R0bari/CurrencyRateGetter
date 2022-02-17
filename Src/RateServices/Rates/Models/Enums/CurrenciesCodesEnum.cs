@@ -9,6 +9,8 @@ namespace RateGetters.Rates.Models.Enums
         [Description("R01235")]
         Usd,
         [Description("R01239")]
-        Eur
+        Eur,
+        [Description("-")]
+        Rub
     }
 }

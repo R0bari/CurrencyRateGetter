@@ -4,7 +4,7 @@ using MediatR;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Services.Interfaces;
 
-namespace CommandLayer.Queries.Rates.GetForDateQuery
+namespace CommandLayer.Queries.Currencies.Rates.GetForDateQuery
 {
     public class GetForDateHandler : IRequestHandler<GetForDateQuery, RateForDate>
     {

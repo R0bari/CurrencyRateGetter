@@ -22,6 +22,19 @@ namespace WebAPI.Tests.Rates
                 .CreateClient();
 
         [Fact]
+        public async Task TestConvertCurrency()
+        {
+            const decimal expected = 1533.0451208506134180107473128m;
+            
+            var actual = JsonConvert.DeserializeObject<decimal>(
+                await GetContentFromResponse(
+                    await SendRequest(
+                        HttpMethod.Get,
+                        $"https://localhost:44322/rates/convert?From=Rub&To=Usd&BaseValue=115000")));
+            
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
         public async Task TestGetForDate()
         {
             var expected = new RateForDate(

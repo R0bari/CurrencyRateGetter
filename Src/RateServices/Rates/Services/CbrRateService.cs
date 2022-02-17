@@ -28,6 +28,13 @@ namespace RateGetters.Rates.Services
 
         public async Task<RateForDate> GetRateAsync(DateTime dateTime, CurrencyCodesEnum code)
         {
+            if (code == CurrencyCodesEnum.Rub)
+            {
+                return new RateForDate(
+                    new Rate(CurrencyCodesEnum.Rub, 1),
+                    dateTime);
+            }
+            
             var ds = new DataSet();
             ds.ReadXml($"{CbrLinkForSingle}?date_req={dateTime:dd/MM/yyyy}");
 
