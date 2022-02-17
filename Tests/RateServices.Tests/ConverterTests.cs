@@ -29,7 +29,10 @@ namespace RateGetters.Tests
             CurrencyCodesEnum to,
             decimal actualValue)
         {
-            var actual = await _converter.Convert(from, to, actualValue); 
+            var actual = await _converter
+                .Convert(from, to, actualValue)
+                .ConfigureAwait(false);
+            
             Assert.Equal(expectedValue, Math.Round(actual, 11));
         }
     }

@@ -29,7 +29,9 @@ namespace RateGetters.Rates.Services
                 return await Task.FromResult(rateForDate);
             }
 
-            var result = await _cbrRateService.GetRateAsync(dateTime, code);
+            var result = await _cbrRateService
+                .GetRateAsync(dateTime, code)
+                .ConfigureAwait(false);
             if (result != _emptyRateForDate)
             {
                 _cache.Set(
@@ -55,7 +57,9 @@ namespace RateGetters.Rates.Services
                 return await Task.FromResult(periodRateList);
             }
 
-            var result = await _cbrRateService.GetRatesForPeriodAsync(first, second, code);
+            var result = await _cbrRateService
+                .GetRatesForPeriodAsync(first, second, code)
+                .ConfigureAwait(false);
             if (!Equals(result, _emptyPeriodRateList))
             {
                 _cache.Set(

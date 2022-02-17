@@ -20,6 +20,11 @@ public class BaseConverter : IConverter
             .GetRateAsync(now, to);
 
         Task.WaitAll(fromRateTask, toRateTask);
-        return Task.FromResult(baseValue * fromRateTask.Result.Rate.Value / toRateTask.Result.Rate.Value);
+
+        var fromRateValue = fromRateTask.Result.Rate.Value;
+        var toRateValue = toRateTask.Result.Rate.Value;
+        return toRateValue != 0
+            ? Task.FromResult(baseValue * fromRateValue / toRateValue)
+            : Task.FromResult(0m);
     }
 }
