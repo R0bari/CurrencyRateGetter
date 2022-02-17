@@ -24,7 +24,7 @@ namespace RateGetters.Rates.Services
 
         public async Task<RateForDate> GetRateAsync(DateTime dateTime, CurrencyCodesEnum code)
         {
-            if (_cache.TryGetValue((dateTime, DateTime.MinValue), out RateForDate rateForDate))
+            if (_cache.TryGetValue((code, dateTime, DateTime.MinValue), out RateForDate rateForDate))
             {
                 return await Task.FromResult(rateForDate);
             }
@@ -33,7 +33,7 @@ namespace RateGetters.Rates.Services
             if (result != _emptyRateForDate)
             {
                 _cache.Set(
-                    (dateTime, DateTime.MinValue),
+                    (code, dateTime, DateTime.MinValue),
                     result,
                     new MemoryCacheEntryOptions
                     {
@@ -48,8 +48,8 @@ namespace RateGetters.Rates.Services
         {
             if (_cache.TryGetValue(
                 first < second
-                    ? (first, second)
-                    : (second, first),
+                    ? (code, first, second)
+                    : (code, second, first),
                 out PeriodRateList periodRateList))
             {
                 return await Task.FromResult(periodRateList);
@@ -59,7 +59,7 @@ namespace RateGetters.Rates.Services
             if (!Equals(result, _emptyPeriodRateList))
             {
                 _cache.Set(
-                    (first, second),
+                    (code, first, second),
                     result,
                     new MemoryCacheEntryOptions
                     {
