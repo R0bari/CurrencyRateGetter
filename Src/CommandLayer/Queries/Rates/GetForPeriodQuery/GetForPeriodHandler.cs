@@ -13,13 +13,10 @@ namespace CommandLayer.Queries.Rates.GetForPeriodQuery
         public GetForPeriodHandler(IRateService rateService) => _rateService = rateService;
 
         public async Task<PeriodRateList> Handle(GetForPeriodQuery request, CancellationToken cancellationToken) =>
-            await Task
-                .Run(
-                    () => _rateService.GetRatesForPeriod(
+            await _rateService.GetRatesForPeriodAsync(
                         request.Specification.FirstDate,
                         request.Specification.SecondDate,
-                        request.Specification.Code),
-                    cancellationToken)
+                        request.Specification.Code)
                 .ConfigureAwait(false);
     }
 }

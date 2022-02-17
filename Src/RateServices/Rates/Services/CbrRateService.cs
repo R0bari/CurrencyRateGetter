@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using RateGetters.Infrastructure.Extensions;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
@@ -14,12 +16,17 @@ namespace RateGetters.Rates.Services
         private const string CbrLinkForSingle = "http://www.cbr.ru/scripts/XML_daily.asp";
         private const string CbrLinkForPeriod = "http://www.cbr.ru/scripts/XML_dynamic.asp";
 
+        private readonly RateForDate _emptyRateForDate =
+            new(
+                new Rate(CurrencyCodesEnum.None, 0m),
+                DateTime.MinValue);
+
         public CbrRateService()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
-        public RateForDate GetRate(DateTime dateTime, CurrencyCodesEnum code)
+        public async Task<RateForDate> GetRateAsync(DateTime dateTime, CurrencyCodesEnum code)
         {
             var ds = new DataSet();
             ds.ReadXml($"{CbrLinkForSingle}?date_req={dateTime:dd/MM/yyyy}");
@@ -27,29 +34,22 @@ namespace RateGetters.Rates.Services
             var currencyRows = ds.Tables["Valute"]?.Rows;
             if (currencyRows is null)
             {
-                return new RateForDate(
-                    new Rate(CurrencyCodesEnum.None, 0m),
-                    DateTime.MinValue);
+                return await Task.FromResult(_emptyRateForDate);
             }
 
-            foreach (DataRow row in currencyRows)
-            {
-                if (row["CharCode"].ToString() != code.ToString().ToUpper())
-                {
-                    continue;
-                }
+            var requiredRow = currencyRows
+                .Cast<DataRow>()
+                .FirstOrDefault(row => row["CharCode"].ToString() == code.ToString().ToUpper());
 
-                return new RateForDate(
-                    new Rate(code, Convert.ToDecimal(row["Value"].ToString())),
-                    dateTime);
-            }
-
-            return new RateForDate(
-                new Rate(CurrencyCodesEnum.None, 0m),
-                DateTime.MinValue);
+            return await Task.FromResult(
+                requiredRow is not null
+                    ? new RateForDate(
+                        new Rate(code, Convert.ToDecimal(requiredRow["Value"].ToString())),
+                        dateTime)
+                    : _emptyRateForDate);
         }
 
-        public PeriodRateList GetRatesForPeriod(DateTime first, DateTime second,
+        public async Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second,
             CurrencyCodesEnum code)
         {
             var ds = new DataSet();
@@ -60,9 +60,9 @@ namespace RateGetters.Rates.Services
                        $"&VAL_NM_RQ={code.Description()}");
 
             var currency = ds.Tables["Record"];
-            return currency?.Rows is null
+            return await Task.FromResult(currency?.Rows is null
                 ? new PeriodRateList(new List<RateForDate>())
-                : PeriodRateList.Prepare(currency, code);
+                : PeriodRateList.Prepare(currency, code));
         }
     }
 }

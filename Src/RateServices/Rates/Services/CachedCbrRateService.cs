@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
@@ -21,14 +22,14 @@ namespace RateGetters.Rates.Services
 
         public CachedCbrRateService(IMemoryCache cache) => _cache = cache;
 
-        public RateForDate GetRate(DateTime dateTime, CurrencyCodesEnum code)
+        public async Task<RateForDate> GetRateAsync(DateTime dateTime, CurrencyCodesEnum code)
         {
             if (_cache.TryGetValue((dateTime, DateTime.MinValue), out RateForDate rateForDate))
             {
-                return rateForDate;
+                return await Task.FromResult(rateForDate);
             }
 
-            var result = _cbrRateService.GetRate(dateTime, code);
+            var result = await _cbrRateService.GetRateAsync(dateTime, code);
             if (result != _emptyRateForDate)
             {
                 _cache.Set(
@@ -40,10 +41,10 @@ namespace RateGetters.Rates.Services
                     });
             }
 
-            return result;
+            return await Task.FromResult(result);
         }
 
-        public PeriodRateList GetRatesForPeriod(DateTime first, DateTime second, CurrencyCodesEnum code)
+        public async Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second, CurrencyCodesEnum code)
         {
             if (_cache.TryGetValue(
                 first < second
@@ -51,10 +52,10 @@ namespace RateGetters.Rates.Services
                     : (second, first),
                 out PeriodRateList periodRateList))
             {
-                return periodRateList;
+                return await Task.FromResult(periodRateList);
             }
 
-            var result = _cbrRateService.GetRatesForPeriod(first, second, code);
+            var result = await _cbrRateService.GetRatesForPeriodAsync(first, second, code);
             if (!Equals(result, _emptyPeriodRateList))
             {
                 _cache.Set(
@@ -66,7 +67,7 @@ namespace RateGetters.Rates.Services
                     });
             }
 
-            return result;
+            return await Task.FromResult(result);
         }
     }
 }
