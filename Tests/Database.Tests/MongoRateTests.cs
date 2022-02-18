@@ -13,7 +13,7 @@ public class MongoRateTests
     [Fact]
     public async void TestRates()
     {
-        var expected = new RateForDate(CurrencyCodesEnum.Usd, 75, DateTime.Today);
+        var expected = new RateForDate(CurrencyCodesEnum.Usd, 75.7619m, DateTime.Today.AddDays(1));
 
         var insertResult = await _context
             .InsertRateForDate(expected)

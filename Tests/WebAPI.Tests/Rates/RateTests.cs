@@ -24,23 +24,15 @@ namespace WebAPI.Tests.Rates
         [Fact]
         public async Task TestConvertCurrency()
         {
-            var fromRate = JsonConvert.DeserializeObject<RateForDate>(
-                await GetContentFromResponse(
-                    await SendRequest(
-                        HttpMethod.Get,
-                        $"https://localhost:44322/rates/date" +
-                        $"?Code={CurrencyCodesEnum.Rub}" +
-                        $"&DateTime={DateTime.Today:yyyy.MM.dd}")));
             var toRate = JsonConvert.DeserializeObject<RateForDate>(
                 await GetContentFromResponse(
                     await SendRequest(
                         HttpMethod.Get,
                         $"https://localhost:44322/rates/date" +
-                        $"?Code={CurrencyCodesEnum.Eur}" +
+                        $"?Code={CurrencyCodesEnum.Usd}" +
                         $"&DateTime={DateTime.Today:yyyy.MM.dd}")));
-            Assert.NotNull(fromRate);
             Assert.NotNull(toRate);
-            var expected = 115000 * fromRate.Value / toRate.Value;
+            var expected = 115000 / toRate.Value;
             
             var actual = JsonConvert.DeserializeObject<decimal>(
                 await GetContentFromResponse(

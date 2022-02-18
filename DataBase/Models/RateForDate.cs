@@ -12,6 +12,8 @@ public record RateForDate
     public decimal Value { get; set; }
     public DateTime DateTime { get; set; }
     
+    public RateForDate() {}
+    
     public RateForDate(CurrencyCodesEnum code, decimal value, DateTime dateTime)
     {
         Code = code;

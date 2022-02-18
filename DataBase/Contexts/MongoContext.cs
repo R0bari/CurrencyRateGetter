@@ -47,11 +47,33 @@ public class MongoContext : IContext
         return result.IsAcknowledged ? 1 : -1;
     }
 
+    public async Task<int> InsertRatesForDate(IEnumerable<RateForDate> ratesForDate)
+    {
+        var models = ratesForDate.Select(rate => new InsertOneModel<RateForDate>(rate));
+        var result = await _ratesForDate
+            .BulkWriteAsync(models)
+            .ConfigureAwait(false);
+        
+        return result.IsAcknowledged ? 1 : -1;
+    }
+
     public async Task<int> DeleteRateForDate(string id)
     {
         var filter = Builders<RateForDate>.Filter.Eq("_id", new ObjectId(id));
         var result = await _ratesForDate.DeleteOneAsync(filter);
 
         return result.IsAcknowledged ? 1 : -1;
+    }
+
+    public async Task<int> RemoveAllRates(bool confirm = false)
+    {
+        if (!confirm)
+        {
+            return -1;
+        }
+        
+        var filter = Builders<RateForDate>.Filter.Empty;
+        var deletionResult = await _ratesForDate.DeleteManyAsync(filter);
+        return deletionResult.IsAcknowledged ? 1 : -1;
     }
 }
