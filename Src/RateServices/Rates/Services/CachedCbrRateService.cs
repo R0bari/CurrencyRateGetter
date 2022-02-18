@@ -13,11 +13,6 @@ namespace RateGetters.Rates.Services
         private readonly CbrRateService _cbrRateService = new();
         private readonly IMemoryCache _cache;
 
-        private readonly RateForDate _emptyRateForDate =
-            new(
-                new Rate(CurrencyCodesEnum.None, 0m),
-                DateTime.MinValue);
-
         private readonly PeriodRateList _emptyPeriodRateList = new(new List<RateForDate>());
 
         public CachedCbrRateService(IMemoryCache cache) => _cache = cache;
@@ -32,7 +27,7 @@ namespace RateGetters.Rates.Services
             var result = await _cbrRateService
                 .GetRateAsync(dateTime, code)
                 .ConfigureAwait(false);
-            if (result != _emptyRateForDate)
+            if (result != RateForDate.Empty)
             {
                 _cache.Set(
                     (code, dateTime, DateTime.MinValue),

@@ -38,7 +38,8 @@ namespace WebAPI.Tests.Rates
         public async Task TestGetForDate()
         {
             var expected = new RateForDate(
-                new Rate(CurrencyCodesEnum.Eur, 86.561m),
+                CurrencyCodesEnum.Eur,
+                86.561m,
                 new DateTime(2022, 02, 04));
 
             var actual = JsonConvert.DeserializeObject<RateForDate>(
@@ -59,16 +60,20 @@ namespace WebAPI.Tests.Rates
                 new RateForDate[]
                 {
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 74.8926m),
+                        CurrencyCodesEnum.Usd,
+                        74.8926m,
                         new DateTime(2021, 12, 01)),
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 73.9746m),
+                        CurrencyCodesEnum.Usd,
+                        73.9746m,
                         new DateTime(2021, 12, 02)),
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 74.0637m),
+                        CurrencyCodesEnum.Usd,
+                        74.0637m,
                         new DateTime(2021, 12, 03)),
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 73.7426m),
+                        CurrencyCodesEnum.Usd,
+                        73.7426m,
                         new DateTime(2021, 12, 04))
                 });
 

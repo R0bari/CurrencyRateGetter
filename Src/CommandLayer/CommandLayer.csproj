@@ -12,10 +12,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\DataBase\DataBase.csproj" />
       <ProjectReference Include="..\RateServices\RateServices.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Mapster" Version="7.2.0" />
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     </ItemGroup>
 

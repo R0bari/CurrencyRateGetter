@@ -1,4 +1,5 @@
 using CommandLayer.DependencyInjection;
+using MapsterMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,7 @@ namespace WebAPI
                 c.SchemaFilter<EnumSchemaFilter>();
             });
             services.AddCommandLayerServices();
+            services.AddTransient<IMapper, Mapper>();
             services.AddMemoryCache();
         }
 

@@ -21,8 +21,8 @@ public class BaseConverter : IConverter
 
         Task.WaitAll(fromRateTask, toRateTask);
 
-        var fromRateValue = fromRateTask.Result.Rate.Value;
-        var toRateValue = toRateTask.Result.Rate.Value;
+        var fromRateValue = fromRateTask.Result.Value;
+        var toRateValue = toRateTask.Result.Value;
         return toRateValue != 0
             ? Task.FromResult(baseValue * fromRateValue / toRateValue)
             : Task.FromResult(0m);
