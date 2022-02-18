@@ -30,7 +30,8 @@ namespace RateGetters.Tests
             int day)
         {
             var expected = new RateForDate(
-                new Rate(code, expectedValue),
+                code,
+                expectedValue,
                 new DateTime(year, month, day));
 
             var actual = await _rateService
@@ -46,7 +47,8 @@ namespace RateGetters.Tests
         public async void TestFailedCbrRateGetterSingleResult()
         {
             var expected = new RateForDate(
-                new Rate(CurrencyCodesEnum.None, 0m),
+                CurrencyCodesEnum.None,
+                0m,
                 DateTime.MinValue);
 
             var actual = await _rateService
@@ -65,16 +67,20 @@ namespace RateGetters.Tests
                 new RateForDate[]
                 {
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 74.8926m),
+                        CurrencyCodesEnum.Usd,
+                        74.8926m,
                         new DateTime(2021, 12, 01)),
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 73.9746m),
+                        CurrencyCodesEnum.Usd,
+                        73.9746m,
                         new DateTime(2021, 12, 02)),
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 74.0637m),
+                        CurrencyCodesEnum.Usd,
+                        74.0637m,
                         new DateTime(2021, 12, 03)),
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 73.7426m),
+                        CurrencyCodesEnum.Usd,
+                        73.7426m,
                         new DateTime(2021, 12, 04))
                 });
 
@@ -95,16 +101,20 @@ namespace RateGetters.Tests
                 new RateForDate[]
                 {
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 74.8926m),
+                        CurrencyCodesEnum.Usd,
+                        74.8926m,
                         new DateTime(2021, 12, 01)),
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 73.9746m),
+                        CurrencyCodesEnum.Usd,
+                        73.9746m,
                         new DateTime(2021, 12, 02)),
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 74.0637m),
+                        CurrencyCodesEnum.Usd,
+                        74.0637m,
                         new DateTime(2021, 12, 03)),
                     new(
-                        new Rate(CurrencyCodesEnum.Usd, 73.7426m),
+                        CurrencyCodesEnum.Usd,
+                        73.7426m,
                         new DateTime(2021, 12, 04))
                 });
 

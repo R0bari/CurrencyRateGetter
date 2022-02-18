@@ -18,7 +18,8 @@ namespace RateGetters.Rates.Models
             new(currency.Rows
                 .Cast<DataRow>()
                 .Select(row => new RateForDate(
-                    new Rate(code, Convert.ToDecimal(row["Value"])),
+                    code,
+                    Convert.ToDecimal(row["Value"]),
                     Convert.ToDateTime(row["Date"]))));
 
         public override string ToString() =>

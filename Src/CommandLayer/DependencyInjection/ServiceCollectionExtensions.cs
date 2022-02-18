@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Mongo.Contexts;
 using RateGetters.Converters;
 using RateGetters.Rates.Services;
 using RateGetters.Rates.Services.Interfaces;
@@ -14,6 +15,7 @@ namespace CommandLayer.DependencyInjection
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient<IRateService, CachedCbrRateService>();
             services.AddTransient<IConverter, BaseConverter>();
+            services.AddSingleton<IContext, MongoContext>();
         }
     }
 }

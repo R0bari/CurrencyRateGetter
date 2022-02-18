@@ -16,11 +16,6 @@ namespace RateGetters.Rates.Services
         private const string CbrLinkForSingle = "http://www.cbr.ru/scripts/XML_daily.asp";
         private const string CbrLinkForPeriod = "http://www.cbr.ru/scripts/XML_dynamic.asp";
 
-        private readonly RateForDate _emptyRateForDate =
-            new(
-                new Rate(CurrencyCodesEnum.None, 0m),
-                DateTime.MinValue);
-
         public CbrRateService()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -31,7 +26,8 @@ namespace RateGetters.Rates.Services
             if (code == CurrencyCodesEnum.Rub)
             {
                 return new RateForDate(
-                    new Rate(CurrencyCodesEnum.Rub, 1),
+                    CurrencyCodesEnum.Rub,
+                    1,
                     dateTime);
             }
             
@@ -41,7 +37,7 @@ namespace RateGetters.Rates.Services
             var currencyRows = ds.Tables["Valute"]?.Rows;
             if (currencyRows is null)
             {
-                return await Task.FromResult(_emptyRateForDate);
+                return await Task.FromResult(RateForDate.Empty);
             }
 
             var requiredRow = currencyRows
@@ -51,9 +47,10 @@ namespace RateGetters.Rates.Services
             return await Task.FromResult(
                 requiredRow is not null
                     ? new RateForDate(
-                        new Rate(code, Convert.ToDecimal(requiredRow["Value"].ToString())),
+                        code,
+                        Convert.ToDecimal(requiredRow["Value"].ToString()),
                         dateTime)
-                    : _emptyRateForDate);
+                    : RateForDate.Empty);
         }
 
         public async Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second,
