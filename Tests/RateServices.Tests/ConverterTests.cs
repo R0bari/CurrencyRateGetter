@@ -3,6 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 using RateGetters.Converters;
 using RateGetters.Rates.Models.Enums;
 using RateGetters.Rates.Services;
+using RateGetters.Rates.Services.Interfaces;
 using Xunit;
 
 namespace RateGetters.Tests
@@ -10,30 +11,36 @@ namespace RateGetters.Tests
     public class ConverterTests
     {
         private readonly IConverter _converter;
+        private readonly IRateService _rateService;
 
-        public ConverterTests() =>
-            _converter =
-                new BaseConverter(
-                    new CachedCbrRateService(
-                        new MemoryCache(
-                            new MemoryCacheOptions())));
-
-        [Theory]
-        [InlineData(1.13719953982, CurrencyCodesEnum.Eur, CurrencyCodesEnum.Usd, 1)]
-        [InlineData(75.0141, CurrencyCodesEnum.Usd, CurrencyCodesEnum.Rub, 1)]
-        [InlineData(1533.04512085061, CurrencyCodesEnum.Rub, CurrencyCodesEnum.Usd, 115_000)]
-        [InlineData(2266.24061343134, CurrencyCodesEnum.Rub, CurrencyCodesEnum.Usd, 170_000)]
-        public async void TestConversations(
-            decimal expectedValue,
-            CurrencyCodesEnum from,
-            CurrencyCodesEnum to,
-            decimal actualValue)
+        public ConverterTests()
         {
-            var actual = await _converter
-                .Convert(from, to, actualValue)
+            _rateService =
+                new CachedCbrRateService(
+                    new MemoryCache(
+                        new MemoryCacheOptions()));
+            _converter =
+                new BaseConverter(_rateService);
+        }
+
+        [Fact]
+        public async void TestConversations()
+        {
+            var now = DateTime.Today;
+            var fromRate = await _rateService
+                .GetRateAsync(now, CurrencyCodesEnum.Usd)
                 .ConfigureAwait(false);
-            
-            Assert.Equal(expectedValue, Math.Round(actual, 11));
+
+            var toRate = await _rateService
+                .GetRateAsync(now, CurrencyCodesEnum.Eur)
+                .ConfigureAwait(false);
+            var expectedValue = 100 * fromRate.Value / toRate.Value;
+
+            var actual = await _converter
+                .Convert(CurrencyCodesEnum.Usd, CurrencyCodesEnum.Eur, 100)
+                .ConfigureAwait(false);
+
+            Assert.Equal(expectedValue, actual);
         }
     }
 }
