@@ -23,13 +23,11 @@ public class MongoRateTests
         var actual = await _context
             .GetRateForDate(expected.Code, expected.DateTime)
             .ConfigureAwait(false);
-
         Assert.Equal(expected, actual);
         
         var deletionResult = await _context
             .DeleteRateForDate(actual.Id)
             .ConfigureAwait(false);
         Assert.True(deletionResult > 0);
-        
     }
 }
