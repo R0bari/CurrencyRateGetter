@@ -21,18 +21,28 @@ public class MongoContext : IContext
         _ratesForDate = database.GetCollection<RateForDate>("RatesForDate");
     }
 
-    public async Task<RateForDate> GetRateForDate(CurrencyCodesEnum code, DateTime dateTime)
+    public async Task<RateForDate> GetRateForDate(CurrencyCodesEnum code, DateTime date)
     {
         var filter = 
             Builders<RateForDate>.Filter.Eq("Code", code)
             &
-            Builders<RateForDate>.Filter.Eq("DateTime", dateTime.Date);
+            Builders<RateForDate>.Filter.Eq("DateTime", date);
         var result = await _ratesForDate
             .Find(filter)
             .Limit(1)
             .FirstOrDefaultAsync()
             .ConfigureAwait(false);
-        return result with {DateTime = result.DateTime.ToLocalTime()};
+        return result;
+    }
+
+    public async Task<DateTime> GetMostRecentDate()
+    {
+        var result = await _ratesForDate
+            .Find(new BsonDocument())
+            .SortByDescending(r => r.Date)
+            .FirstOrDefaultAsync()
+            .ConfigureAwait(false);
+        return result?.Date ?? new DateTime(1999, 12, 31);
     }
 
     public async Task<int> InsertRateForDate(RateForDate rateForDate)
@@ -49,7 +59,8 @@ public class MongoContext : IContext
 
     public async Task<int> InsertRatesForDate(IEnumerable<RateForDate> ratesForDate)
     {
-        var models = ratesForDate.Select(rate => new InsertOneModel<RateForDate>(rate));
+        var models = ratesForDate
+            .Select(rate => new InsertOneModel<RateForDate>(rate));
         var result = await _ratesForDate
             .BulkWriteAsync(models)
             .ConfigureAwait(false);
@@ -57,15 +68,17 @@ public class MongoContext : IContext
         return result.IsAcknowledged ? 1 : -1;
     }
 
-    public async Task<int> DeleteRateForDate(string id)
+    public async Task<int> DeleteRateById(string id)
     {
         var filter = Builders<RateForDate>.Filter.Eq("_id", new ObjectId(id));
-        var result = await _ratesForDate.DeleteOneAsync(filter);
+        var result = await _ratesForDate
+            .DeleteOneAsync(filter)
+            .ConfigureAwait(false);
 
         return result.IsAcknowledged ? 1 : -1;
     }
 
-    public async Task<int> RemoveAllRates(bool confirm = false)
+    public async Task<int> DeleteAllRates(bool confirm = false)
     {
         if (!confirm)
         {

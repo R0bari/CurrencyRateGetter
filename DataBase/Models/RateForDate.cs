@@ -8,16 +8,25 @@ public record RateForDate
 {
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; }
+
     public CurrencyCodesEnum Code { get; set; }
     public decimal Value { get; set; }
-    public DateTime DateTime { get; set; }
-    
-    public RateForDate() {}
-    
-    public RateForDate(CurrencyCodesEnum code, decimal value, DateTime dateTime)
+
+    private readonly DateTime _date;
+    public DateTime Date
+    {
+        get => _date;
+        init => _date = new DateTime(value.Ticks, DateTimeKind.Utc);
+    }
+
+    public RateForDate()
+    {
+    }
+
+    public RateForDate(CurrencyCodesEnum code, decimal value, DateTime date)
     {
         Code = code;
         Value = value;
-        DateTime = dateTime.Date;
+        Date = date;
     }
 }

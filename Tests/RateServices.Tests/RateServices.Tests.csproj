@@ -6,9 +6,9 @@
 
         <RootNamespace>RateGetters.Tests</RootNamespace>
 
-        <LangVersion>9</LangVersion>
+        <LangVersion>10</LangVersion>
 
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,3 +1,4 @@
+using BackgroundServices.Schedulers;
 using Mongo.Contexts;
 
 namespace BackgroundServices;
@@ -13,8 +14,9 @@ public static class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureServices(services =>
             {
-                services.AddHostedService<Worker>();
-                services.AddTransient<ILogger, Logger<Worker>>();
+                services.AddHostedService<BackgroundWorker>();
+                services.AddTransient<ILogger, Logger<BackgroundWorker>>();
                 services.AddTransient<IContext, MongoContext>();
+                services.AddScoped<IJobScheduler, JobScheduler>();
             });
 }

@@ -10,10 +10,16 @@
     <ItemGroup>
         <PackageReference Include="Mapster" Version="7.2.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+        <PackageReference Include="Quartz" Version="3.3.3" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\DataBase\DataBase.csproj" />
       <ProjectReference Include="..\Src\RateServices\RateServices.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="appsettings.json" />
+      <Content Remove="appsettings.Development.json" />
     </ItemGroup>
 </Project>

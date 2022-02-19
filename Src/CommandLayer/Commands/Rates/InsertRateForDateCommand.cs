@@ -2,9 +2,8 @@ using System;
 using MediatR;
 using RateGetters.Rates.Models.Enums;
 
-namespace CommandLayer.Commands.Rates
-{
-    public record InsertRateForDateSpecification(CurrencyCodesEnum Code, decimal Value, DateTime DateTime);
+namespace CommandLayer.Commands.Rates;
 
-    public record InsertRateForDateCommand(InsertRateForDateSpecification Specification) : IRequest<int>;
-}
+public record InsertRateForDateSpecification(CurrencyCodesEnum Code, decimal Value, DateTime Date);
+
+public record InsertRateForDateCommand(InsertRateForDateSpecification Specification) : IRequest<int>;

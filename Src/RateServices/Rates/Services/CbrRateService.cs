@@ -9,64 +9,63 @@ using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 using RateGetters.Rates.Services.Interfaces;
 
-namespace RateGetters.Rates.Services
+namespace RateGetters.Rates.Services;
+
+public record CbrRateService : IRateService
 {
-    public record CbrRateService : IRateService
+    private const string CbrLinkForSingle = "http://www.cbr.ru/scripts/XML_daily.asp";
+    private const string CbrLinkForPeriod = "http://www.cbr.ru/scripts/XML_dynamic.asp";
+
+    public CbrRateService()
     {
-        private const string CbrLinkForSingle = "http://www.cbr.ru/scripts/XML_daily.asp";
-        private const string CbrLinkForPeriod = "http://www.cbr.ru/scripts/XML_dynamic.asp";
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+    }
 
-        public CbrRateService()
+    public async Task<RateForDate> GetRateAsync(DateTime date, CurrencyCodesEnum code)
+    {
+        if (code == CurrencyCodesEnum.Rub)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            return new RateForDate(
+                CurrencyCodesEnum.Rub,
+                1,
+                date);
         }
-
-        public async Task<RateForDate> GetRateAsync(DateTime dateTime, CurrencyCodesEnum code)
-        {
-            if (code == CurrencyCodesEnum.Rub)
-            {
-                return new RateForDate(
-                    CurrencyCodesEnum.Rub,
-                    1,
-                    dateTime);
-            }
             
-            var ds = new DataSet();
-            ds.ReadXml($"{CbrLinkForSingle}?date_req={dateTime:dd/MM/yyyy}");
+        var ds = new DataSet();
+        ds.ReadXml($"{CbrLinkForSingle}?date_req={date:dd/MM/yyyy}");
 
-            var currencyRows = ds.Tables["Valute"]?.Rows;
-            if (currencyRows is null)
-            {
-                return await Task.FromResult(RateForDate.Empty);
-            }
-
-            var requiredRow = currencyRows
-                .Cast<DataRow>()
-                .FirstOrDefault(row => row["CharCode"].ToString() == code.ToString().ToUpper());
-
-            return await Task.FromResult(
-                requiredRow is not null
-                    ? new RateForDate(
-                        code,
-                        Convert.ToDecimal(requiredRow["Value"].ToString()),
-                        dateTime)
-                    : RateForDate.Empty);
-        }
-
-        public async Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second,
-            CurrencyCodesEnum code)
+        var currencyRows = ds.Tables["Valute"]?.Rows;
+        if (currencyRows is null)
         {
-            var ds = new DataSet();
-
-            ds.ReadXml($"{CbrLinkForPeriod}" +
-                       $"?date_req1={(first < second ? first : second):dd/MM/yyyy}" +
-                       $"&date_req2={(first > second ? first : second):dd/MM/yyyy}" +
-                       $"&VAL_NM_RQ={code.Description()}");
-
-            var currency = ds.Tables["Record"];
-            return await Task.FromResult(currency?.Rows is null
-                ? new PeriodRateList(new List<RateForDate>())
-                : PeriodRateList.Prepare(currency, code));
+            return await Task.FromResult(RateForDate.Empty);
         }
+
+        var requiredRow = currencyRows
+            .Cast<DataRow>()
+            .FirstOrDefault(row => row["CharCode"].ToString() == code.ToString().ToUpper());
+
+        return await Task.FromResult(
+            requiredRow is not null
+                ? new RateForDate(
+                    code,
+                    Convert.ToDecimal(requiredRow["Value"].ToString()),
+                    date)
+                : RateForDate.Empty);
+    }
+
+    public async Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second,
+        CurrencyCodesEnum code)
+    {
+        var ds = new DataSet();
+
+        ds.ReadXml($"{CbrLinkForPeriod}" +
+                   $"?date_req1={(first < second ? first : second):dd/MM/yyyy}" +
+                   $"&date_req2={(first > second ? first : second):dd/MM/yyyy}" +
+                   $"&VAL_NM_RQ={code.Description()}");
+
+        var currency = ds.Tables["Record"];
+        return await Task.FromResult(currency?.Rows is null
+            ? new PeriodRateList(new List<RateForDate>())
+            : PeriodRateList.Prepare(currency, code));
     }
 }

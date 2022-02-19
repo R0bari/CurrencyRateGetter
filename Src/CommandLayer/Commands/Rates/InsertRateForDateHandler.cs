@@ -4,20 +4,19 @@ using MediatR;
 using Mongo.Contexts;
 using Mongo.Models;
 
-namespace CommandLayer.Commands.Rates
-{
-    public class InsertRateForDateHandler : IRequestHandler<InsertRateForDateCommand, int>
-    {
-        private readonly IContext _context;
+namespace CommandLayer.Commands.Rates;
 
-        public InsertRateForDateHandler(IContext context) => _context = context;
+public class InsertRateForDateHandler : IRequestHandler<InsertRateForDateCommand, int>
+{
+    private readonly IContext _context;
+
+    public InsertRateForDateHandler(IContext context) => _context = context;
         
-        public async Task<int> Handle(InsertRateForDateCommand request, CancellationToken cancellationToken) =>
-            await _context.InsertRateForDate(
-                    new RateForDate(
-                        request.Specification.Code,
-                        request.Specification.Value,
-                        request.Specification.DateTime))
-                .ConfigureAwait(false);
-    }
+    public async Task<int> Handle(InsertRateForDateCommand request, CancellationToken cancellationToken) =>
+        await _context.InsertRateForDate(
+                new RateForDate(
+                    request.Specification.Code,
+                    request.Specification.Value,
+                    request.Specification.Date))
+            .ConfigureAwait(false);
 }

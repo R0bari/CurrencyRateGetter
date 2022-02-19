@@ -24,7 +24,7 @@ namespace CommandLayer.Queries.Currencies.Rates.GetForDateQuery
         public async Task<RateForDate> Handle(GetForDateQuery request, CancellationToken cancellationToken) =>
             (await _context.GetRateForDate(
                     request.Specification.Code,
-                    request.Specification.DateTime)
+                    request.Specification.Date)
                 .ConfigureAwait(false))
             .Adapt<RateForDate>();
     }

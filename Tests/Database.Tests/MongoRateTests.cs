@@ -13,7 +13,10 @@ public class MongoRateTests
     [Fact]
     public async void TestRates()
     {
-        var expected = new RateForDate(CurrencyCodesEnum.Usd, 75.7619m, DateTime.Today.AddDays(1));
+        var expected = new RateForDate(
+            CurrencyCodesEnum.Usd,
+            75.7619m,
+            DateTime.Today.AddDays(1));
 
         var insertResult = await _context
             .InsertRateForDate(expected)
@@ -21,12 +24,12 @@ public class MongoRateTests
         Assert.True(insertResult > 0);
 
         var actual = await _context
-            .GetRateForDate(expected.Code, expected.DateTime)
+            .GetRateForDate(expected.Code, expected.Date)
             .ConfigureAwait(false);
         Assert.Equal(expected, actual);
         
         var deletionResult = await _context
-            .DeleteRateForDate(actual.Id)
+            .DeleteRateById(actual.Id)
             .ConfigureAwait(false);
         Assert.True(deletionResult > 0);
     }
