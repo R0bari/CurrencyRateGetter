@@ -14,12 +14,17 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DataBase\DataBase.csproj" />
-      <ProjectReference Include="..\Src\RateServices\RateServices.csproj" />
+      <ProjectReference Include="..\..\Src\RateServices\RateServices.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="appsettings.json" />
       <Content Remove="appsettings.Development.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="DataBase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\DataBase\bin\Debug\net6.0\DataBase.dll</HintPath>
+      </Reference>
     </ItemGroup>
 </Project>
