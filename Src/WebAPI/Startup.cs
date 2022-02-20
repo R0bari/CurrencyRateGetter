@@ -1,4 +1,4 @@
-using CommandLayer.DependencyInjection;
+using DomainServices.DependencyInjection;
 using MapsterMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,48 +10,47 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using WebAPI.Infrastructure;
 
-namespace WebAPI
+namespace WebAPI;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
-        {
-        }
+    }
 
-        public static void ConfigureServices(IServiceCollection services)
-        {
-            services
-                .AddControllers()
-                .AddNewtonsoftJson(o =>
-                {
-                    o.SerializerSettings.Converters.Add(
-                        new StringEnumConverter{NamingStrategy = new CamelCaseNamingStrategy()});
-                });
-            services.AddSwaggerGen(c =>
+    public static void ConfigureServices(IServiceCollection services)
+    {
+        services
+            .AddControllers()
+            .AddNewtonsoftJson(o =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebAPI", Version = "v1"});
-                c.EnableAnnotations();
-                c.SchemaFilter<EnumSchemaFilter>();
+                o.SerializerSettings.Converters.Add(
+                    new StringEnumConverter{NamingStrategy = new CamelCaseNamingStrategy()});
             });
-            services.AddCommandLayerServices();
-            services.AddTransient<IMapper, Mapper>();
-            services.AddMemoryCache();
-        }
-
-        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        services.AddSwaggerGen(c =>
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
-            }
+            c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebAPI", Version = "v1"});
+            c.EnableAnnotations();
+            c.SchemaFilter<EnumSchemaFilter>();
+        });
+        services.AddDomainServices();
+        services.AddTransient<IMapper, Mapper>();
+        services.AddMemoryCache();
+    }
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+    public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
         }
+
+        app.UseHttpsRedirection();
+
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 }

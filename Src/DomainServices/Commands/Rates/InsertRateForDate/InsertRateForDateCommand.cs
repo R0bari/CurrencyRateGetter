@@ -2,7 +2,7 @@ using System;
 using MediatR;
 using RateGetters.Rates.Models.Enums;
 
-namespace CommandLayer.Commands.Rates;
+namespace DomainServices.Commands.Rates.InsertRateForDate;
 
 public record InsertRateForDateSpecification(CurrencyCodesEnum Code, decimal Value, DateTime Date);
 

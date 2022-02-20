@@ -23,16 +23,16 @@ public class MongoContext : IContext
 
     public async Task<RateForDate> GetRateForDate(CurrencyCodesEnum code, DateTime date)
     {
-        var filter = 
-            Builders<RateForDate>.Filter.Eq("Code", code)
+        var filter =
+            Builders<RateForDate>.Filter.Eq(r => r.Code, code)
             &
-            Builders<RateForDate>.Filter.Eq("DateTime", date);
+            Builders<RateForDate>.Filter.Eq(r => r.Date, date);
         var result = await _ratesForDate
             .Find(filter)
             .Limit(1)
             .FirstOrDefaultAsync()
             .ConfigureAwait(false);
-        return result;
+        return result with {Date = result.Date.ToLocalTime()};
     }
 
     public async Task<DateTime> GetMostRecentDate()
@@ -42,7 +42,7 @@ public class MongoContext : IContext
             .SortByDescending(r => r.Date)
             .FirstOrDefaultAsync()
             .ConfigureAwait(false);
-        return result?.Date ?? new DateTime(1999, 12, 31);
+        return result?.Date.ToLocalTime() ?? new DateTime(1999, 12, 31);
     }
 
     public async Task<int> InsertRateForDate(RateForDate rateForDate)
@@ -57,7 +57,7 @@ public class MongoContext : IContext
         return result.IsAcknowledged ? 1 : -1;
     }
 
-    public async Task<int> InsertRatesForDate(IEnumerable<RateForDate> ratesForDate)
+    public async Task<int> InsertRateForDateList(IEnumerable<RateForDate> ratesForDate)
     {
         var ratesList = ratesForDate.ToArray();
         if (!ratesList.Any())

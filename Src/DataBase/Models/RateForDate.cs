@@ -12,12 +12,7 @@ public record RateForDate
     public CurrencyCodesEnum Code { get; set; }
     public decimal Value { get; set; }
 
-    private readonly DateTime _date;
-    public DateTime Date
-    {
-        get => _date;
-        init => _date = new DateTime(value.Ticks, DateTimeKind.Utc);
-    }
+    public DateTime Date { get; set; }
 
     public RateForDate()
     {

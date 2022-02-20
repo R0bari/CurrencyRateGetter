@@ -9,16 +9,11 @@
 
     <ItemGroup>
         <PackageReference Include="Mapster" Version="7.2.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-        <PackageReference Include="MongoDB.Driver" Version="2.14.1" />
-        <PackageReference Include="MongoDB.Driver.GridFS" Version="2.14.1" />
         <PackageReference Include="Quartz" Version="3.3.3" />
         <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.3.3" />
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.3.3" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\Src\RateServices\RateServices.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -30,5 +25,9 @@
       <Reference Include="DataBase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
         <HintPath>..\DataBase\bin\Debug\net6.0\DataBase.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
     </ItemGroup>
 </Project>

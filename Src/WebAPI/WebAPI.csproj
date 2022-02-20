@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CommandLayer\CommandLayer.csproj" />
+      <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
     </ItemGroup>
 
 </Project>

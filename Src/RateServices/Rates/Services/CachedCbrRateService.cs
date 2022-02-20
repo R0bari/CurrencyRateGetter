@@ -11,11 +11,12 @@ namespace RateGetters.Rates.Services;
 public class CachedCbrRateService : IRateService
 {
     private readonly CbrRateService _cbrRateService = new();
-    private readonly IMemoryCache _cache;
+
+    private readonly IMemoryCache _cache =
+        new MemoryCache(
+            new MemoryCacheOptions());
 
     private readonly PeriodRateList _emptyPeriodRateList = new(new List<RateForDate>());
-
-    public CachedCbrRateService(IMemoryCache cache) => _cache = cache;
 
     public async Task<RateForDate> GetRateAsync(DateTime date, CurrencyCodesEnum code)
     {

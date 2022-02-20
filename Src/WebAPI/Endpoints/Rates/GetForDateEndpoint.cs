@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
-using CommandLayer.Queries.Currencies.Rates.GetForDateQuery;
+using DomainServices.Queries.Currencies.Rates.GetForDate;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RateGetters.Rates.Models;

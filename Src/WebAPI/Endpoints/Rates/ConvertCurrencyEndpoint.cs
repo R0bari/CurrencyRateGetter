@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
-using CommandLayer.Queries.Currencies.Convert.ConvertCurrencyQuery;
+using DomainServices.Queries.Currencies.Convert.ConvertCurrencyQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

@@ -1,12 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=39339319_002D7d12_002D4503_002Db02c_002D75ffcf37ef51/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestSuccessfulRateGetterResult" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d7aecc2b_002Dbe07_002D401b_002D82da_002D1b90826ead18/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SolutionTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=39b2f082_002D9cfc_002D463e_002D9a05_002Dd3de0c98304e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestCurrenciesRates" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Or&gt;&#xD;
-    &lt;Project Location="D:\Work\.NET\RateService\Tests\RateServices.Tests" Presentation="&amp;lt;RateServices.Tests&amp;gt;" /&gt;&#xD;
-    &lt;Project Location="D:\Work\.NET\RateService\Tests\WebAPI.Tests" Presentation="&amp;lt;WebAPI.Tests&amp;gt;" /&gt;&#xD;
-  &lt;/Or&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
 	
 	</wpf:ResourceDictionary>

@@ -11,7 +11,7 @@ public interface IContext
     
     Task<int> InsertRateForDate(RateForDate rateForDate);
     
-    Task<int> InsertRatesForDate(IEnumerable<RateForDate> ratesForDate);
+    Task<int> InsertRateForDateList(IEnumerable<RateForDate> ratesForDate);
     
     Task<int> DeleteRateById(string id);
 

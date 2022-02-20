@@ -4,7 +4,7 @@ using MediatR;
 using Mongo.Contexts;
 using Mongo.Models;
 
-namespace CommandLayer.Commands.Rates;
+namespace DomainServices.Commands.Rates.InsertRateForDate;
 
 public class InsertRateForDateHandler : IRequestHandler<InsertRateForDateCommand, int>
 {

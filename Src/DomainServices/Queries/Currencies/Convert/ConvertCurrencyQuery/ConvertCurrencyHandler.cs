@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using RateGetters.Converters;
 
-namespace CommandLayer.Queries.Currencies.Convert.ConvertCurrencyQuery
+namespace DomainServices.Queries.Currencies.Convert.ConvertCurrencyQuery
 {
     public class ConvertCurrencyHandler : IRequestHandler<ConvertCurrencyQuery, decimal>
     {
