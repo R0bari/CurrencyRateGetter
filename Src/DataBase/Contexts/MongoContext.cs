@@ -59,7 +59,12 @@ public class MongoContext : IContext
 
     public async Task<int> InsertRatesForDate(IEnumerable<RateForDate> ratesForDate)
     {
-        var models = ratesForDate
+        var ratesList = ratesForDate.ToArray();
+        if (!ratesList.Any())
+        {
+            return -1;
+        }
+        var models = ratesList
             .Select(rate => new InsertOneModel<RateForDate>(rate));
         var result = await _ratesForDate
             .BulkWriteAsync(models)

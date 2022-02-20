@@ -56,8 +56,13 @@ public record CbrRateService : IRateService
     public async Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second,
         CurrencyCodesEnum code)
     {
+        if (first == second)
+        {
+            var rate = await GetRateAsync(first, code).ConfigureAwait(false);
+            return new PeriodRateList(new[] {rate});
+        }
+        
         var ds = new DataSet();
-
         ds.ReadXml($"{CbrLinkForPeriod}" +
                    $"?date_req1={(first < second ? first : second):dd/MM/yyyy}" +
                    $"&date_req2={(first > second ? first : second):dd/MM/yyyy}" +

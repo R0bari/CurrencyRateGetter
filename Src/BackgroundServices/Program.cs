@@ -1,4 +1,4 @@
-using BackgroundServices.Schedulers;
+using BackgroundServices.Jobs.Refreshers;
 using Mongo.Contexts;
 
 namespace BackgroundServices;
@@ -14,9 +14,7 @@ public static class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureServices(services =>
             {
-                services.AddHostedService<BackgroundWorker>();
-                services.AddTransient<ILogger, Logger<BackgroundWorker>>();
                 services.AddTransient<IContext, MongoContext>();
-                services.AddScoped<IJobScheduler, JobScheduler>();
+                services.AddRefresherJobScheduling();
             });
 }

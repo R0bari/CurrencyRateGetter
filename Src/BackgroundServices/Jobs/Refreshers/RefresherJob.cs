@@ -12,24 +12,22 @@ namespace BackgroundServices.Jobs.Refreshers;
 public class RefresherJob : IJob
 {
     private readonly IContext _context;
-    private readonly IRateService _rateService =
-        new CachedCbrRateService(
-            new MemoryCache(
-                new MemoryCacheOptions()));
+    private readonly IRateService _rateService;
+    private readonly ILogger<RefresherJob> _logger;
+
     private readonly CurrencyCodesEnum[] _currencies =
     {
         CurrencyCodesEnum.Eur,
         CurrencyCodesEnum.Usd
     };
 
-    public RefresherJob()
-    {
-        _context = new MongoContext();
-    }
-
-    public RefresherJob(IContext context)
+    public RefresherJob(IContext context, ILogger<RefresherJob> logger)
     {
         _context = context;
+        _logger = logger;
+        _rateService = new CachedCbrRateService(
+            new MemoryCache(
+                new MemoryCacheOptions()));
     }
 
     public async Task Execute(IJobExecutionContext context)
@@ -39,6 +37,7 @@ public class RefresherJob : IJob
             .ConfigureAwait(false);
         if (recentDate == DateTime.Today)
         {
+            _logger.Log(LogLevel.Information, "Rates are up to date.");
             return;
         }
         await RefreshFromDate(recentDate.AddDays(1))
@@ -66,6 +65,7 @@ public class RefresherJob : IJob
         await _context
             .InsertRatesForDate(ratesToInsert)
             .ConfigureAwait(false);
+        _logger.Log(LogLevel.Information, "Rates updated.");
     }
     
     private async Task<IEnumerable<RateForDate>> FillGaps(
