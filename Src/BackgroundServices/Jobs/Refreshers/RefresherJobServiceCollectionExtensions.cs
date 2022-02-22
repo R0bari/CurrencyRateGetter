@@ -19,17 +19,23 @@ public static class RefresherJobServiceCollectionExtensions
                 tp.MaxConcurrency = 10;
             });
 
-            q.ScheduleJob<RefresherJob>(trigger => trigger
-                .WithIdentity("RefresherTrigger", "mainGroup")
-                .StartAt(DateTime.Today.AddDays(1).AddHours(2))
+            var jobKey = new JobKey("Refresher Rates Job", "mainGroup");
+            q.AddJob<RefresherJob>(jobKey, j => j.WithDescription("Refreshing rates"));
+
+            q.AddTrigger(t => t
+                .WithIdentity("Start now trigger")
+                .ForJob(jobKey)
+                .StartNow()
+                .WithDescription("Triggers when the application starts up"));
+
+            q.AddTrigger(t => t
+                .WithIdentity("Start every day trigger")
+                .ForJob(jobKey)
+                .StartAt(DateTime.Today.AddDays(1))
                 .WithSimpleSchedule(x => x
                     .WithIntervalInHours(24)
                     .RepeatForever())
-                .WithDescription("Triggers every day at 2:00 (UTC+3)"));
-
-            q.AddJob<RefresherJob>(j => j
-                .StoreDurably()
-                .WithDescription("Refreshing rates"));
+                .WithDescription("Triggers every day at 0:00 (UTC+3)"));
         });
                 
         services.AddQuartzHostedService(options =>

@@ -1,5 +1,6 @@
 using BackgroundServices.Jobs.Refreshers;
 using DomainServices.DependencyInjection;
+using Mongo.Contexts;
 
 namespace BackgroundServices;
 
@@ -16,5 +17,6 @@ public static class Program
             {
                 services.AddDomainServices();
                 services.AddRefresherJobScheduling();
+                services.AddSingleton<IContext, MongoContext>();
             });
 }

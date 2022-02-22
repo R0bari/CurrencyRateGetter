@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Mongo.Contexts;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using WebAPI.Infrastructure;
@@ -34,6 +35,7 @@ public class Startup
             c.SchemaFilter<EnumSchemaFilter>();
         });
         services.AddDomainServices();
+        services.AddSingleton<IContext, MongoContext>();
         services.AddTransient<IMapper, Mapper>();
         services.AddMemoryCache();
     }
