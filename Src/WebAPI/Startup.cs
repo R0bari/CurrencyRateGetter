@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using Mongo.Contexts;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using RateGetters.Contexts;
 using WebAPI.Infrastructure;
 
 namespace WebAPI;

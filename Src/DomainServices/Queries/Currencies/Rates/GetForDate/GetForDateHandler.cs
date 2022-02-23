@@ -4,6 +4,7 @@ using Mapster;
 using MapsterMapper;
 using MediatR;
 using Mongo.Contexts;
+using RateGetters.Contexts;
 using RateGetters.Rates.Models;
 using RateGetters.Rates.Services.Interfaces;
 

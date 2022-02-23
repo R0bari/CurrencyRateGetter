@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Mongo.Contexts;
-using Mongo.Models;
+using RateGetters.Contexts;
+using RateGetters.Rates.Models;
 
 namespace DomainServices.Commands.Rates.InsertRateForDate;
 

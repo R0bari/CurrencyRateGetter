@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using MediatR;
-using Mongo.Models;
+using RateGetters.Rates.Models;
 
 namespace DomainServices.Commands.Rates.InsertRateForDateList;
 

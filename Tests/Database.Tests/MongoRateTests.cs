@@ -1,6 +1,7 @@
 using System;
 using Mongo.Contexts;
-using Mongo.Models;
+using RateGetters.Contexts;
+using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 using Xunit;
 
@@ -29,7 +30,7 @@ public class MongoRateTests
         Assert.Equal(expected, actual);
         
         var deletionResult = await _context
-            .DeleteRateById(actual.Id)
+            .DeleteRate(actual)
             .ConfigureAwait(false);
         Assert.True(deletionResult > 0);
     }

@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Mongo.Contexts;
+using RateGetters.Contexts;
 
 namespace DomainServices.Commands.Rates.InsertRateForDateList;
 

@@ -1,7 +1,10 @@
-using Mongo.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 
-namespace Mongo.Contexts;
+namespace RateGetters.Contexts;
 
 public interface IContext
 {
@@ -13,7 +16,7 @@ public interface IContext
     
     Task<int> InsertRateForDateList(IEnumerable<RateForDate> ratesForDate);
     
-    Task<int> DeleteRateById(string id);
+    Task<int> DeleteRate(RateForDate rate);
 
     Task<int> DeleteAllRates(bool confirm = false);
 }

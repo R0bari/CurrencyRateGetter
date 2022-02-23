@@ -5,8 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapster;
 using MediatR;
-using Mongo.Contexts;
-using Mongo.Models;
+using RateGetters.Contexts;
+using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 using RateGetters.Rates.Services.Interfaces;
 

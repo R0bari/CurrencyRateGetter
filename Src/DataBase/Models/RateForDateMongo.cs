@@ -4,7 +4,7 @@ using RateGetters.Rates.Models.Enums;
 
 namespace Mongo.Models;
 
-public record RateForDate
+public record RateForDateMongo
 {
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; }
@@ -14,11 +14,11 @@ public record RateForDate
 
     public DateTime Date { get; set; }
 
-    public RateForDate()
+    public RateForDateMongo()
     {
     }
 
-    public RateForDate(CurrencyCodesEnum code, decimal value, DateTime date)
+    public RateForDateMongo(CurrencyCodesEnum code, decimal value, DateTime date)
     {
         Code = code;
         Value = value;

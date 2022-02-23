@@ -1,7 +1,10 @@
-﻿using Mongo.Models;
+﻿using Mapster;
+using Mongo.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
+using RateGetters.Contexts;
+using RateGetters.Rates.Models;
 using RateGetters.Rates.Models.Enums;
 
 namespace Mongo.Contexts;
@@ -9,8 +12,10 @@ namespace Mongo.Contexts;
 public class MongoContext : IContext
 {
     private readonly IGridFSBucket _gridFs;
-    private readonly IMongoCollection<RateForDate> _ratesForDate;
-    private const string ConnectionString = "mongodb://localhost:27017/CurrencyView?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false";
+    private readonly IMongoCollection<RateForDateMongo> _ratesForDate;
+
+    private const string ConnectionString =
+        "mongodb://localhost:27017/CurrencyView?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false";
 
     public MongoContext()
     {
@@ -18,21 +23,21 @@ public class MongoContext : IContext
         var client = new MongoClient(ConnectionString);
         var database = client.GetDatabase(connection.DatabaseName);
         _gridFs = new GridFSBucket(database);
-        _ratesForDate = database.GetCollection<RateForDate>("RatesForDate");
+        _ratesForDate = database.GetCollection<RateForDateMongo>("RatesForDate");
     }
 
     public async Task<RateForDate> GetRateForDate(CurrencyCodesEnum code, DateTime date)
     {
         var filter =
-            Builders<RateForDate>.Filter.Eq(r => r.Code, code)
+            Builders<RateForDateMongo>.Filter.Eq(r => r.Code, code)
             &
-            Builders<RateForDate>.Filter.Eq(r => r.Date, date);
+            Builders<RateForDateMongo>.Filter.Eq(r => r.Date, date);
         var result = await _ratesForDate
             .Find(filter)
             .Limit(1)
             .FirstOrDefaultAsync()
             .ConfigureAwait(false);
-        return result with {Date = result.Date.ToLocalTime()};
+        return result.Adapt<RateForDate>() with {Date = result.Date.ToLocalTime()};
     }
 
     public async Task<DateTime> GetMostRecentDate()
@@ -47,13 +52,14 @@ public class MongoContext : IContext
 
     public async Task<int> InsertRateForDate(RateForDate rateForDate)
     {
+        var rateToInsert = rateForDate.Adapt<RateForDateMongo>();
         var result = await _ratesForDate
-            .BulkWriteAsync(new WriteModel<RateForDate>[]
+            .BulkWriteAsync(new WriteModel<RateForDateMongo>[]
             {
-                new InsertOneModel<RateForDate>(rateForDate)
+                new InsertOneModel<RateForDateMongo>(rateToInsert)
             })
             .ConfigureAwait(false);
-        
+
         return result.IsAcknowledged ? 1 : -1;
     }
 
@@ -64,18 +70,22 @@ public class MongoContext : IContext
         {
             return -1;
         }
+
         var models = ratesList
-            .Select(rate => new InsertOneModel<RateForDate>(rate));
+            .Select(rate => rate.Adapt<RateForDateMongo>())
+            .Select(rateToInsert => new InsertOneModel<RateForDateMongo>(rateToInsert));
         var result = await _ratesForDate
             .BulkWriteAsync(models)
             .ConfigureAwait(false);
-        
+
         return result.IsAcknowledged ? 1 : -1;
     }
 
-    public async Task<int> DeleteRateById(string id)
+    public async Task<int> DeleteRate(RateForDate rate)
     {
-        var filter = Builders<RateForDate>.Filter.Eq("_id", new ObjectId(id));
+        var filter = Builders<RateForDateMongo>.Filter.Eq(r => r.Date, rate.Date)
+                     &
+                     Builders<RateForDateMongo>.Filter.Eq(r => r.Code, rate.Code);
         var result = await _ratesForDate
             .DeleteOneAsync(filter)
             .ConfigureAwait(false);
@@ -89,8 +99,8 @@ public class MongoContext : IContext
         {
             return -1;
         }
-        
-        var filter = Builders<RateForDate>.Filter.Empty;
+
+        var filter = Builders<RateForDateMongo>.Filter.Empty;
         var deletionResult = await _ratesForDate.DeleteManyAsync(filter);
         return deletionResult.IsAcknowledged ? 1 : -1;
     }
