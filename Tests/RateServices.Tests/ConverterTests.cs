@@ -33,7 +33,10 @@ public class ConverterTests
         var expectedValue = 100 * fromRate.Value / toRate.Value;
 
         var actual = await _converter
-            .Convert(CurrencyCodesEnum.Usd, CurrencyCodesEnum.Eur, 100)
+            .Convert( new ConvertCurrencySpecification(
+                CurrencyCodesEnum.Usd,
+                CurrencyCodesEnum.Eur,
+                100))
             .ConfigureAwait(false);
 
         Assert.Equal(expectedValue, actual);

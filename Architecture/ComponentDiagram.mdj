@@ -62,7 +62,7 @@
 											"top": 193,
 											"width": 237,
 											"height": 13,
-											"text": "Interfaces"
+											"text": "AppInterfaces"
 										},
 										{
 											"_type": "LabelView",
@@ -1909,7 +1909,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF/F/4jdJSNWng="
 					},
-					"name": "Interfaces",
+					"name": "AppInterfaces",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",

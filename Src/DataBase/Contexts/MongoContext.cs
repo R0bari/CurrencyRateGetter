@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Mongo.Extensions;
 using Mongo.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -31,7 +32,7 @@ public class MongoContext : IContext
         var filter =
             Builders<RateForDateMongo>.Filter.Eq(r => r.Code, code)
             &
-            Builders<RateForDateMongo>.Filter.Eq(r => r.Date, date);
+            Builders<RateForDateMongo>.Filter.Eq(r => r.Date, date.Date.PrepareForMongo());
         var result = await _ratesForDate
             .Find(filter)
             .Limit(1)
@@ -83,9 +84,10 @@ public class MongoContext : IContext
 
     public async Task<int> DeleteRate(RateForDate rate)
     {
-        var filter = Builders<RateForDateMongo>.Filter.Eq(r => r.Date, rate.Date)
+        var (currencyCodesEnum, _, dateTime) = rate;
+        var filter = Builders<RateForDateMongo>.Filter.Eq(r => r.Date, dateTime.Date.PrepareForMongo())
                      &
-                     Builders<RateForDateMongo>.Filter.Eq(r => r.Code, rate.Code);
+                     Builders<RateForDateMongo>.Filter.Eq(r => r.Code, currencyCodesEnum);
         var result = await _ratesForDate
             .DeleteOneAsync(filter)
             .ConfigureAwait(false);
