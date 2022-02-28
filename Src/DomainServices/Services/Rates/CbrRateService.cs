@@ -4,12 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RateGetters.Infrastructure.Extensions;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Models.Enums;
-using RateGetters.Rates.Services.Interfaces;
+using Domain.Infrastructure.Extensions;
+using Domain.Models.Rates;
+using Domain.Models.Rates.Enums;
+using DomainServices.Services.Rates.Interfaces;
 
-namespace RateGetters.Rates.Services;
+namespace DomainServices.Services.Rates;
 
 public record CbrRateService : IRateService
 {
@@ -30,11 +30,12 @@ public record CbrRateService : IRateService
                 1,
                 date);
         }
-            
-        var ds = new DataSet();
-        ds.ReadXml($"{CbrLinkForSingle}?date_req={date:dd/MM/yyyy}");
 
-        var currencyRows = ds.Tables["Valute"]?.Rows;
+        var currencyRows = ReadTableFromXml(
+                $"{CbrLinkForSingle}?date_req={date:dd/MM/yyyy}",
+                "Valute")
+            ?.Rows;
+        
         if (currencyRows is null)
         {
             return await Task.FromResult(RateForDate.Empty);
@@ -54,23 +55,34 @@ public record CbrRateService : IRateService
     }
 
     public async Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second,
+        CurrencyCodesEnum code) =>
+        first == second
+            ? new PeriodRateList(new List<RateForDate>
+            {
+                await GetRateAsync(first, code)
+                    .ConfigureAwait(false)
+            })
+            : await ReadRatesForDateFromXml(first, second, code);
+
+
+    private static async Task<PeriodRateList> ReadRatesForDateFromXml(DateTime first, DateTime second,
         CurrencyCodesEnum code)
     {
-        if (first == second)
-        {
-            var rate = await GetRateAsync(first, code).ConfigureAwait(false);
-            return new PeriodRateList(new[] {rate});
-        }
-        
-        var ds = new DataSet();
-        ds.ReadXml($"{CbrLinkForPeriod}" +
-                   $"?date_req1={(first < second ? first : second):dd/MM/yyyy}" +
-                   $"&date_req2={(first > second ? first : second):dd/MM/yyyy}" +
-                   $"&VAL_NM_RQ={code.Description()}");
-
-        var currency = ds.Tables["Record"];
+        var currency = ReadTableFromXml(
+            $"{CbrLinkForPeriod}" +
+            $"?date_req1={(first < second ? first : second):dd/MM/yyyy}" +
+            $"&date_req2={(first > second ? first : second):dd/MM/yyyy}" +
+            $"&VAL_NM_RQ={code.Description()}",
+            "Record");
         return await Task.FromResult(currency?.Rows is null
-            ? new PeriodRateList(new List<RateForDate>())
+            ? PeriodRateList.Empty
             : PeriodRateList.Prepare(currency, code));
+    }
+
+    private static DataTable ReadTableFromXml(string fileName, string tableName)
+    {
+        var ds = new DataSet();
+        ds.ReadXml(fileName);
+        return ds.Tables[tableName];
     }
 }

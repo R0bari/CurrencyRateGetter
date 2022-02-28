@@ -3,9 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
 using DomainServices.Queries.Currencies.Convert.ConvertCurrency;
+using DomainServices.Services.Converters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RateGetters.Converters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace WebAPI.Endpoints.Rates;

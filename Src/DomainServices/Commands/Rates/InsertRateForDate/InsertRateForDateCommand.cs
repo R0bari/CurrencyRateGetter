@@ -1,6 +1,6 @@
 using System;
+using Domain.Models.Rates.Enums;
 using MediatR;
-using RateGetters.Rates.Models.Enums;
 
 namespace DomainServices.Commands.Rates.InsertRateForDate;
 

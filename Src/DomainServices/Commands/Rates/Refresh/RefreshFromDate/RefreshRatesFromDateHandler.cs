@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Contexts;
+using Domain.Models.Rates;
+using Domain.Models.Rates.Enums;
+using DomainServices.Services.Rates.Interfaces;
 using Mapster;
 using MediatR;
-using RateGetters.Contexts;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Models.Enums;
-using RateGetters.Rates.Services.Interfaces;
 
 namespace DomainServices.Commands.Rates.Refresh.RefreshFromDate;
 

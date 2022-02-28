@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateServices", "Src\RateServices\RateServices.csproj", "{4454CB56-B19E-40BA-9E37-F694F1063484}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "Src\WebAPI\WebAPI.csproj", "{C86BF3EE-C6FC-40E4-93B6-CE17E3CCAEE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateServices.Tests", "Tests\RateServices.Tests\RateServices.Tests.csproj", "{118D4BAB-BFBE-41EC-83BF-7D3D29C3FB7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainServices.Tests", "Tests\DomainServices.Tests\DomainServices.Tests.csproj", "{118D4BAB-BFBE-41EC-83BF-7D3D29C3FB7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.Tests", "Tests\WebAPI.Tests\WebAPI.Tests.csproj", "{FDE21B6F-30F1-4F9D-ADD1-211B7B128C71}"
 EndProject
@@ -16,16 +14,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundServices", "Src\B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "Src\DataBase\DataBase.csproj", "{6583D2EE-BEC0-4F80-8EAD-E54A642FF4D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Src\Domain\Domain.csproj", "{2EDA9B7F-7ED6-4E20-AD28-213F110865F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4454CB56-B19E-40BA-9E37-F694F1063484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4454CB56-B19E-40BA-9E37-F694F1063484}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4454CB56-B19E-40BA-9E37-F694F1063484}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4454CB56-B19E-40BA-9E37-F694F1063484}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C86BF3EE-C6FC-40E4-93B6-CE17E3CCAEE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C86BF3EE-C6FC-40E4-93B6-CE17E3CCAEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C86BF3EE-C6FC-40E4-93B6-CE17E3CCAEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,5 +50,9 @@ Global
 		{6583D2EE-BEC0-4F80-8EAD-E54A642FF4D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6583D2EE-BEC0-4F80-8EAD-E54A642FF4D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6583D2EE-BEC0-4F80-8EAD-E54A642FF4D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EDA9B7F-7ED6-4E20-AD28-213F110865F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EDA9B7F-7ED6-4E20-AD28-213F110865F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EDA9B7F-7ED6-4E20-AD28-213F110865F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EDA9B7F-7ED6-4E20-AD28-213F110865F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

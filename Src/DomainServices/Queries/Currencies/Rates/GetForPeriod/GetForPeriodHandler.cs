@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Domain.Models.Rates;
+using DomainServices.Services.Rates.Interfaces;
 using MediatR;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Services.Interfaces;
 
 namespace DomainServices.Queries.Currencies.Rates.GetForPeriod;
 

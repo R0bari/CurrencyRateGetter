@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace RateGetters.Converters;
+namespace DomainServices.Services.Converters;
 
 public interface IConverter
 {

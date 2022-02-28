@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using DomainServices.Services.Converters;
 using MediatR;
-using RateGetters.Converters;
 
 namespace DomainServices.Queries.Currencies.Convert.ConvertCurrency;
 
