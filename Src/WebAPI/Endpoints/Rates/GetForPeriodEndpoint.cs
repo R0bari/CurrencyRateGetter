@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
+using Domain.Models.Rates;
 using DomainServices.Queries.Currencies.Rates.GetForPeriod;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RateGetters.Rates.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace WebAPI.Endpoints.Rates

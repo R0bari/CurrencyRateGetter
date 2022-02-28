@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using MediatR;
+using DomainServices.Services.Converters;
+using DomainServices.Services.Rates;
+using DomainServices.Services.Rates.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using RateGetters.Converters;
-using RateGetters.Rates.Services;
-using RateGetters.Rates.Services.Interfaces;
+using MediatR;
 
 namespace DomainServices.DependencyInjection;
 

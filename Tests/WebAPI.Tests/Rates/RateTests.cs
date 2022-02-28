@@ -1,12 +1,13 @@
 ﻿using Xunit;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Domain.Models.Rates;
+using Domain.Models.Rates.Enums;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Models.Enums;
 
 namespace WebAPI.Tests.Rates;
 
@@ -65,7 +66,7 @@ public class RateTests
     public async Task TestGetForPeriod()
     {
         var expected = new PeriodRateList(
-            new RateForDate[]
+            new List<RateForDate>
             {
                 new(
                     CurrencyCodesEnum.Usd,

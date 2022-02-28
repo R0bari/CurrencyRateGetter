@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Models.Enums;
+using Domain.Models.Rates;
+using Domain.Models.Rates.Enums;
 
-namespace RateGetters.Contexts;
+namespace Domain.Contexts;
 
 public interface IContext
 {

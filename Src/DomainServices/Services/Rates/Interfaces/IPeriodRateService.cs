@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Models.Enums;
+using Domain.Models.Rates;
+using Domain.Models.Rates.Enums;
 
-namespace RateGetters.Rates.Services.Interfaces
+namespace DomainServices.Services.Rates.Interfaces
 {
     public interface IPeriodRateService
     {

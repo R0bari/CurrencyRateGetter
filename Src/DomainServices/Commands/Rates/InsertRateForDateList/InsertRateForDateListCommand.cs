@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using Domain.Models.Rates;
 using MediatR;
-using RateGetters.Rates.Models;
 
 namespace DomainServices.Commands.Rates.InsertRateForDateList;
 

@@ -1,8 +1,8 @@
 using System;
-using RateGetters.Converters;
-using RateGetters.Rates.Models.Enums;
-using RateGetters.Rates.Services;
-using RateGetters.Rates.Services.Interfaces;
+using Domain.Models.Rates.Enums;
+using DomainServices.Services.Converters;
+using DomainServices.Services.Rates;
+using DomainServices.Services.Rates.Interfaces;
 using Xunit;
 
 namespace RateServices.Tests;
