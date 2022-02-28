@@ -1,12 +1,12 @@
-﻿using Mapster;
+﻿using Domain.Contexts;
+using Domain.Models.Rates;
+using Domain.Models.Rates.Enums;
+using Mapster;
 using Mongo.Extensions;
 using Mongo.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
-using RateGetters.Contexts;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Models.Enums;
 
 namespace Mongo.Contexts;
 
@@ -38,6 +38,11 @@ public class MongoContext : IContext
             .Limit(1)
             .FirstOrDefaultAsync()
             .ConfigureAwait(false);
+        if (result is null)
+        {
+            return RateForDate.Empty;
+        }
+        
         return result.Adapt<RateForDate>() with {Date = result.Date.ToLocalTime()};
     }
 

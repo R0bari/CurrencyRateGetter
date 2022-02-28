@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Contexts;
+using Domain.Models.Rates;
 using MediatR;
-using RateGetters.Contexts;
-using RateGetters.Rates.Models;
 
 namespace DomainServices.Commands.Rates.InsertRateForDate;
 

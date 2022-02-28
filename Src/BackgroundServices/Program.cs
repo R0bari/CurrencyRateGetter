@@ -1,7 +1,7 @@
 using BackgroundServices.Jobs.Refreshers;
+using Domain.Contexts;
 using DomainServices.DependencyInjection;
 using Mongo.Contexts;
-using RateGetters.Contexts;
 
 namespace BackgroundServices;
 

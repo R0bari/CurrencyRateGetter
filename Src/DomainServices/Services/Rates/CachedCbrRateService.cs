@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Domain.Models.Rates;
+using Domain.Models.Rates.Enums;
+using DomainServices.Services.Rates.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Models.Enums;
-using RateGetters.Rates.Services.Interfaces;
 
-namespace RateGetters.Rates.Services;
+namespace DomainServices.Services.Rates;
 
 public class CachedCbrRateService : IRateService
 {
@@ -15,8 +15,6 @@ public class CachedCbrRateService : IRateService
     private readonly IMemoryCache _cache =
         new MemoryCache(
             new MemoryCacheOptions());
-
-    private readonly PeriodRateList _emptyPeriodRateList = new(new List<RateForDate>());
 
     public async Task<RateForDate> GetRateAsync(DateTime date, CurrencyCodesEnum code)
     {
@@ -56,7 +54,7 @@ public class CachedCbrRateService : IRateService
         var result = await _cbrRateService
             .GetRatesForPeriodAsync(first, second, code)
             .ConfigureAwait(false);
-        if (!Equals(result, _emptyPeriodRateList))
+        if (!Equals(result, PeriodRateList.Empty))
         {
             _cache.Set(
                 (code, first, second),

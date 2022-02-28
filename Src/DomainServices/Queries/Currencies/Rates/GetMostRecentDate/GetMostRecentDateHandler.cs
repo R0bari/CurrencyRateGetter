@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Contexts;
 using MediatR;
 using Mongo.Contexts;
-using RateGetters.Contexts;
 
 namespace DomainServices.Queries.Currencies.Rates.GetMostRecentDate;
 

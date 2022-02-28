@@ -1,3 +1,4 @@
+using Domain.Contexts;
 using DomainServices.DependencyInjection;
 using MapsterMapper;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +10,6 @@ using Microsoft.OpenApi.Models;
 using Mongo.Contexts;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using RateGetters.Contexts;
 using WebAPI.Infrastructure;
 
 namespace WebAPI;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using RateGetters.Rates.Models.Enums;
-using RateGetters.Rates.Services.Interfaces;
+using Domain.Models.Rates.Enums;
+using DomainServices.Services.Rates.Interfaces;
 
-namespace RateGetters.Converters;
+namespace DomainServices.Services.Converters;
 
 
 public record ConvertCurrencySpecification(CurrencyCodesEnum From, CurrencyCodesEnum To, decimal BaseValue);

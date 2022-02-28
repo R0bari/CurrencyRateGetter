@@ -1,6 +1,6 @@
+using Domain.Models.Rates.Enums;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using RateGetters.Rates.Models.Enums;
 
 namespace Mongo.Models;
 

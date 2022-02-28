@@ -1,8 +1,9 @@
 using System;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Models.Enums;
-using RateGetters.Rates.Services;
-using RateGetters.Rates.Services.Interfaces;
+using System.Collections.Generic;
+using Domain.Models.Rates;
+using Domain.Models.Rates.Enums;
+using DomainServices.Services.Rates;
+using DomainServices.Services.Rates.Interfaces;
 using Xunit;
 
 namespace RateServices.Tests;
@@ -59,7 +60,7 @@ public class SbrRateServiceTests
     public async void TestSuccessfulCbrRateGetterPeriodResult()
     {
         var expected = new PeriodRateList(
-            new RateForDate[]
+            new List<RateForDate>
             {
                 new(
                     CurrencyCodesEnum.Usd,
@@ -93,7 +94,7 @@ public class SbrRateServiceTests
     public async void TestSuccessfulCbrRateGetterPeriodResultWithHolidays()
     {
         var expected = new PeriodRateList(
-            new RateForDate[]
+            new List<RateForDate>
             {
                 new(
                     CurrencyCodesEnum.Usd,

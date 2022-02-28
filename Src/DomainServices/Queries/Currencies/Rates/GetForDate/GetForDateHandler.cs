@@ -1,12 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Mapster;
-using MapsterMapper;
+using Domain.Contexts;
+using Domain.Models.Rates;
+using DomainServices.Services.Rates.Interfaces;
 using MediatR;
-using Mongo.Contexts;
-using RateGetters.Contexts;
-using RateGetters.Rates.Models;
-using RateGetters.Rates.Services.Interfaces;
 
 namespace DomainServices.Queries.Currencies.Rates.GetForDate;
 
@@ -14,18 +11,27 @@ public class GetForDateHandler : IRequestHandler<GetForDateQuery, RateForDate>
 {
     private readonly IRateService _rateService;
     private readonly IContext _context;
-    private readonly IMapper _mapper;
-    public GetForDateHandler(IRateService rateService, IContext context, IMapper mapper)
+
+    public GetForDateHandler(IRateService rateService, IContext context)
     {
         _rateService = rateService;
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<RateForDate> Handle(GetForDateQuery request, CancellationToken cancellationToken) =>
-        (await _context.GetRateForDate(
+    public async Task<RateForDate> Handle(GetForDateQuery request, CancellationToken cancellationToken)
+    {
+        var contextResult = await _context.GetRateForDate(
                 request.Specification.Code,
                 request.Specification.Date)
-            .ConfigureAwait(false))
-        .Adapt<RateForDate>();
+            .ConfigureAwait(false);
+        if (contextResult == RateForDate.Empty)
+        {
+            return await _rateService.GetRateAsync(
+                    request.Specification.Date,
+                    request.Specification.Code)
+                .ConfigureAwait(false);
+        }
+
+        return contextResult;
+    }
 }
