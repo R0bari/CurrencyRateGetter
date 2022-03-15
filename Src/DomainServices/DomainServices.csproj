@@ -3,18 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>10</LangVersion>
-        <AssemblyName>DomainServices</AssemblyName>
-        <RootNamespace>DomainServices</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-      <Reference Include="DataBase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\DataBase\bin\Debug\net6.0\DataBase.dll</HintPath>
-      </Reference>
-      <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-        <HintPath>..\..\..\..\..\..\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\5.0.0\ref\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-      </Reference>
-    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Mapster" Version="7.2.0" />

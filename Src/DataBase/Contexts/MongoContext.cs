@@ -1,14 +1,18 @@
-﻿using Domain.Contexts;
+﻿using DataBase.Extensions;
+using DataBase.Models;
+using Domain.Contexts;
 using Domain.Models.Rates;
 using Domain.Models.Rates.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Mapster;
-using Mongo.Extensions;
-using Mongo.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 
-namespace Mongo.Contexts;
+namespace DataBase.Contexts;
 
 public class MongoContext : IContext
 {

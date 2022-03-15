@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain.Contexts;
 using MediatR;
-using Mongo.Contexts;
 
 namespace DomainServices.Queries.Currencies.Rates.GetMostRecentDate;
 

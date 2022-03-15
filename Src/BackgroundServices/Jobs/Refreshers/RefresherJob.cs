@@ -1,5 +1,7 @@
+using System.Threading.Tasks;
 using DomainServices.Commands.Rates.Refresh.RefreshRates;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Quartz;
 
 namespace BackgroundServices.Jobs.Refreshers;

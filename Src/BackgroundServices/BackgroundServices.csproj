@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <ImplicitUsings>disable</ImplicitUsings>
         <UserSecretsId>dotnet-BackgroundServices-F944D9F9-EF11-4836-8522-89189F102137</UserSecretsId>
     </PropertyGroup>
 
@@ -17,17 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Remove="appsettings.json" />
-      <Content Remove="appsettings.Development.json" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="DataBase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\DataBase\bin\Debug\net6.0\DataBase.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\DataBase\DataBase.csproj" />
       <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
     </ItemGroup>
 </Project>

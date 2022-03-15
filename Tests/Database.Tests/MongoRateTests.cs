@@ -1,8 +1,8 @@
 using System;
+using DataBase.Contexts;
 using Domain.Contexts;
 using Domain.Models.Rates;
 using Domain.Models.Rates.Enums;
-using Mongo.Contexts;
 using Xunit;
 
 namespace Database.Tests;

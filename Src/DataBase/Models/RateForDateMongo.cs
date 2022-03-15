@@ -1,8 +1,9 @@
+using System;
 using Domain.Models.Rates.Enums;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Mongo.Models;
+namespace DataBase.Models;
 
 public record RateForDateMongo
 {
