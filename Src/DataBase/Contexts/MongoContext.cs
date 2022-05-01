@@ -11,6 +11,7 @@ using Mapster;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
+using System.Threading;
 
 namespace DataBase.Contexts;
 
@@ -50,14 +51,21 @@ public class MongoContext : IContext
         return result.Adapt<RateForDate>() with {Date = result.Date.ToLocalTime()};
     }
 
-    public async Task<DateTime> GetMostRecentDate()
+    public async Task<List<RateForDate>> GetAllRatesForDate(DateTime dateTime)
     {
-        var result = await _ratesForDate
-            .Find(new BsonDocument())
-            .SortByDescending(r => r.Date)
-            .FirstOrDefaultAsync()
+        var filter = Builders<RateForDateMongo>.Filter.Gte(
+            r => r.Date,
+            dateTime.Subtract(new TimeSpan(5, 0, 0, 0)).PrepareForMongo());
+
+        var lastWeekCurrencyRates = await _ratesForDate
+            .Find(filter)
+            .ToListAsync()
             .ConfigureAwait(false);
-        return result?.Date.ToLocalTime() ?? new DateTime(1999, 12, 31);
+        var mostCurrentRates = lastWeekCurrencyRates
+            .GroupBy(r => r.Date)
+            .LastOrDefault();
+
+        return mostCurrentRates?.Adapt<List<RateForDate>>() ?? new List<RateForDate>();
     }
 
     public async Task<int> InsertRateForDate(RateForDate rateForDate)

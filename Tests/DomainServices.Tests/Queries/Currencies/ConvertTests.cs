@@ -5,14 +5,14 @@ using DomainServices.Services.Rates;
 using DomainServices.Services.Rates.Interfaces;
 using Xunit;
 
-namespace RateServices.Tests;
+namespace DomainServices.Tests.Queries.Currencies;
 
-public class ConverterTests
+public class ConvertTests
 {
     private readonly IConverter _converter;
     private readonly IRateService _rateService;
 
-    public ConverterTests()
+    public ConvertTests()
     {
         _rateService = new CachedCbrRateService();
         _converter =

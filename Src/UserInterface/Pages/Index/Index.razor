@@ -1,0 +1,58 @@
+﻿@page "/"
+
+<PageTitle>RateService</PageTitle>
+
+<div class=component-wrapper>
+    <div class="component-header">
+        <h1>@title</h1>
+    </div>
+
+    <h2>Brief</h2>
+
+    <p>
+        The project aim is to consolidate theoretical knowledge in software
+        arhitecure development after reading the Martin's book <strong>"Clean Architecture"</strong>.
+    </p>
+
+    <p>
+        Just realised the pros of onion architecturing style. Going to
+        applicate it to some further projects where it will be appropriate.
+    </p>
+
+    <h2>Current architecture</h2>
+
+    <img src="https://raw.githubusercontent.com/R0bari/RateService/main/Architecture/Architecture.jpg" />
+
+    <p>
+        The main idea of this architecture is independency of domain from
+        implementation details. Currently interface IContext is defined in
+        Domain and Database contains MongoContext implementing this interface.
+        Due to DI Domain doesn't know what implementation of IContext it uses, it
+        would be quite easy to change MongoDb to MySQL for example. Moreover
+        different application interfaces can inject different implementations of
+        IContext. For example, WebAPI can use MongoContext while for background
+        services it's enough to store information on disk and that's why they don't
+        require DB implementation of IContext and implement MemoryContext.
+    </p>
+
+    <h2>Further plans</h2>
+
+    <p>Upcoming plans include:</p>
+
+    <ul>
+        <li>adding tests for background services;</li>
+        <li>moving Mediatr from DomainServices to gain possibility to change the implementation of CQRS part;</li>
+        <li>sticking all implementation of injected instruments (such as Mongo, Mediatr) to single project.
+            It will simplify dependencies for existing application interfaces.</li>
+    </ul>
+
+    <h2>Summary</h2>
+    <p>
+        Architecture development is a very interesting part of Software Engineering.
+        It's worth to understand the advantages and disadvantages of each concrete
+        achitecture style before chosing it for a new project.</p>
+</div>
+
+@code {
+    private string title = "RateService";
+}

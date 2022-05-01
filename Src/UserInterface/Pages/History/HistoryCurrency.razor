@@ -1,0 +1,48 @@
+﻿@page "/history/{currencyParam}"
+
+<PageTitle>@title</PageTitle>
+
+@using UserInterface.Services;
+
+@inject CurrenciesService currenciesService;
+
+<NavLink class="nav-link" href="history">
+    <span class="oi oi-arrow-left" aria-hidden="true"></span> Back
+</NavLink>
+<div class="component-header">
+    <h1>@title</h1>
+</div>
+
+<RadzenChart>
+    <RadzenLineSeries Smooth="true" Data="@rates" CategoryProperty="Date" Title="@currency.ToString()" LineType="LineType.Solid" ValueProperty="Value">
+        <TooltipTemplate Context="rate">
+            <div>
+                <span>@rate.Date.ToShortDateString()</span><br />
+                <strong>@currency : @rate.Value.ToString("N2") RUB</strong>
+            </div>
+        </TooltipTemplate>
+    </RadzenLineSeries>
+    <RadzenValueAxis>
+        <RadzenGridLines Visible="true" />
+    </RadzenValueAxis>
+    <RadzenCategoryAxis>
+        <RadzenGridLines Visible="true" />
+    </RadzenCategoryAxis>
+    <RadzenLegend Visible="false" />
+</RadzenChart>
+
+@code {
+    [Parameter]
+    public string currencyParam { get; set; } = "Usd";
+    public CurrencyCodesEnum currency { get; set; } = CurrencyCodesEnum.Usd;
+    private List<RateForDate> rates = new List<RateForDate>();
+    private string title = $"Rates history";
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        title = $"Rates history for {currencyParam}";
+        currency = (CurrencyCodesEnum)Enum.Parse(typeof(CurrencyCodesEnum), currencyParam, true);
+        rates = await currenciesService.GetRatesForLastYear(currency);
+    }
+}

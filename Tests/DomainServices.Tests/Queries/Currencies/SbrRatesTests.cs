@@ -6,13 +6,13 @@ using DomainServices.Services.Rates;
 using DomainServices.Services.Rates.Interfaces;
 using Xunit;
 
-namespace RateServices.Tests;
+namespace DomainServices.Tests.Queries.Currencies;
 
-public class SbrRateServiceTests
+public class SbrRatesTests
 {
     private readonly IRateService _rateService;
 
-    public SbrRateServiceTests() => _rateService = new CachedCbrRateService();
+    public SbrRatesTests() => _rateService = new CachedCbrRateService();
 
     [Theory]
     [InlineData(76.4849, CurrencyCodesEnum.Usd, 2022, 02, 03)]
@@ -40,12 +40,9 @@ public class SbrRateServiceTests
     }
 
     [Fact]
-    public async void TestFailedCbrRateGetterSingleResult()
+    public async void TestFailedCbrGetRateForDateResult()
     {
-        var expected = new RateForDate(
-            CurrencyCodesEnum.None,
-            0m,
-            DateTime.MinValue);
+        var expected = RateForDate.Empty;
 
         var actual = await _rateService
             .GetRateAsync(
@@ -57,7 +54,7 @@ public class SbrRateServiceTests
     }
 
     [Fact]
-    public async void TestSuccessfulCbrRateGetterPeriodResult()
+    public async void TestCbrGetRateForPeriodResult()
     {
         var expected = new PeriodRateList(
             new List<RateForDate>
@@ -91,7 +88,7 @@ public class SbrRateServiceTests
     }
 
     [Fact]
-    public async void TestSuccessfulCbrRateGetterPeriodResultWithHolidays()
+    public async void TestCbrGetRateForPeriodWithHolidays()
     {
         var expected = new PeriodRateList(
             new List<RateForDate>
