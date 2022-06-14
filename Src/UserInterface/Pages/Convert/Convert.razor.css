@@ -1,0 +1,5 @@
+﻿.convert-block, .convert-input {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
