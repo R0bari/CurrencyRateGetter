@@ -51,7 +51,7 @@ public class MongoContext : IContext
         return result.Adapt<RateForDate>() with {Date = result.Date.ToLocalTime()};
     }
 
-    public async Task<List<RateForDate>> GetAllRatesForDate(DateTime dateTime)
+    public async Task<RateForDateList> GetAllRatesForDate(DateTime dateTime)
     {
         var filter = Builders<RateForDateMongo>.Filter.Gte(
             r => r.Date,
@@ -65,7 +65,7 @@ public class MongoContext : IContext
             .GroupBy(r => r.Date)
             .LastOrDefault();
 
-        return mostCurrentRates?.Adapt<List<RateForDate>>() ?? new List<RateForDate>();
+        return new RateForDateList(mostCurrentRates?.Adapt<List<RateForDate>>());
     }
 
     public async Task<int> InsertRateForDate(RateForDate rateForDate)

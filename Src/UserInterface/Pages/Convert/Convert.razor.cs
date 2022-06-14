@@ -5,7 +5,7 @@ namespace UserInterface.Pages.Convert
 {
     public record ConvertModel
     {
-        private readonly List<RateForDate> _rates;
+        private readonly RateForDateList _rates;
 
         private CurrencyCodesEnum _leftCode;
         public CurrencyCodesEnum LeftCode
@@ -51,8 +51,8 @@ namespace UserInterface.Pages.Convert
             }
         }
 
-        public static ConvertModel Empty { get; } = new ConvertModel(CurrencyCodesEnum.Usd, CurrencyCodesEnum.Rub, 1m, new List<RateForDate>());
-        public ConvertModel(CurrencyCodesEnum left, CurrencyCodesEnum right, decimal leftValue, List<RateForDate> rates)
+        public static ConvertModel Empty { get; } = new ConvertModel(CurrencyCodesEnum.Usd, CurrencyCodesEnum.Rub, 1m, RateForDateList.Empty);
+        public ConvertModel(CurrencyCodesEnum left, CurrencyCodesEnum right, decimal leftValue, RateForDateList rates)
         {
             (_leftCode, _rightCode, _leftValue, _rates) = (left, right, leftValue, rates);
             _rightValue = CalculateRightValue();

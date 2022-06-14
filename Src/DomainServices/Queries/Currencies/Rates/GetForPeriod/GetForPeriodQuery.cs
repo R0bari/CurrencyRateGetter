@@ -6,5 +6,5 @@ using MediatR;
 namespace DomainServices.Queries.Currencies.Rates.GetForPeriod
 {
     public record GetForPeriodSpecification(CurrencyCodesEnum Code, DateTime FirstDate, DateTime SecondDate);
-    public record GetForPeriodQuery(GetForPeriodSpecification Specification) : IRequest<PeriodRateList>;
+    public record GetForPeriodQuery(GetForPeriodSpecification Specification) : IRequest<RateForDateList>;
 }

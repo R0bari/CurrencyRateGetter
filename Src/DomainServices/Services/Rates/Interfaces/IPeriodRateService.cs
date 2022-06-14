@@ -7,6 +7,6 @@ namespace DomainServices.Services.Rates.Interfaces
 {
     public interface IPeriodRateService
     {
-        public Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second, CurrencyCodesEnum code);
+        public Task<RateForDateList> GetRatesForPeriodAsync(DateTime first, DateTime second, CurrencyCodesEnum code);
     }
 }

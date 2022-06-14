@@ -21,7 +21,7 @@ public class RefreshRatesFromDateHandler : IRequestHandler<RefreshRatesFromDateC
 
     public RefreshRatesFromDateHandler(IRateService rateService, IContext context)
     {
-        _currencies = Enum.GetValues(typeof(CurrencyCodesEnum)).Cast<CurrencyCodesEnum>()
+        _currencies = Enum.GetValues<CurrencyCodesEnum>()
             .Where(currency => currency != CurrencyCodesEnum.None && currency != CurrencyCodesEnum.Rub)
             .ToArray();
         _rateService = rateService;

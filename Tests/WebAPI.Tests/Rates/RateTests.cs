@@ -65,7 +65,7 @@ public class RateTests
     [Fact]
     public async Task TestGetForPeriod()
     {
-        var expected = new PeriodRateList(
+        var expected = new RateForDateList(
             new List<RateForDate>
             {
                 new(
@@ -86,7 +86,7 @@ public class RateTests
                     new DateTime(2021, 12, 04))
             });
 
-        var actual = JsonConvert.DeserializeObject<PeriodRateList>(
+        var actual = JsonConvert.DeserializeObject<RateForDateList>(
             await GetContentFromResponse(
                 await SendRequest(
                     HttpMethod.Get,

@@ -11,28 +11,26 @@
     <h1>@title</h1>
 </div>
 
-<RadzenDataGrid AllowSorting="true" Data="@currencyRates" TItem="RateForDate" ColumnWidth="300px"
-                RowClick="@OnClick" CellRender="@CellRender">
-    <Columns>
-        <RadzenDataGridColumn TItem="RateForDate" Property="Code" Filterable="false" Title="Currency" Width="200px" TextAlign="TextAlign.Left" />
-        <RadzenDataGridColumn TItem="RateForDate" Property="Value" Filterable="false" Title="Current value" Width="200px" TextAlign="TextAlign.Left" />
-    </Columns>
-</RadzenDataGrid>
+<div class="component-wrapper">
+    <RadzenDataGrid AllowSorting="true" Data="@currencyRates" TItem="RateForDate" ColumnWidth="300px" CellRender="@CellRender">
+        <Columns>
+            <RadzenDataGridColumn TItem="RateForDate" Property="Code" Filterable="false" Title="Currency" Width="200px" TextAlign="TextAlign.Left">
+                <Template Context="rate">
+                    <span class="table-cell" @onclick="@(() => OnCurrencyClick(rate.Code))">@rate.Code</span>
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="RateForDate" Property="Value" Filterable="false" Title="Current value" Width="200px" TextAlign="TextAlign.Left" />
+        </Columns>
+    </RadzenDataGrid>
+</div>
 
 @code {
     private string title = "Rates history";
-    private List<RateForDate> currencyRates = new List<RateForDate>();
+    private RateForDateList currencyRates = RateForDateList.Empty;
 
-    protected override async Task OnInitializedAsync() =>
-        currencyRates = await currenciesService.GetAllRatesForDate(DateTime.Now);
+    protected override async Task OnInitializedAsync() => currencyRates = await currenciesService.GetAllRatesForDate(DateTime.Now);
 
-    private void OnClick(DataGridRowMouseEventArgs<RateForDate> args) =>
-        uriHelper.NavigateTo($"history/{args.Data.Code}");
+    private void OnCurrencyClick(CurrencyCodesEnum code) => uriHelper.NavigateTo($"history/{code}");
 
-    void CellRender(DataGridCellRenderEventArgs<RateForDate> args) =>
-        args.Attributes.Add(
-            "style",
-            args.Column.Property == "Code"
-            ? "cursor: pointer"
-            : "cursor: default");
+    void CellRender(DataGridCellRenderEventArgs<RateForDate> args) => args.Attributes.Add("style", "border-right: none; background-color: #fff");
 }

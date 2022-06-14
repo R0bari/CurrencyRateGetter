@@ -2,6 +2,7 @@
 
 <PageTitle>@title</PageTitle>
 
+@using UserInterface.Infrastructure
 @using UserInterface.Services
 
 @inject CurrenciesService currenciesService;
@@ -14,7 +15,7 @@
     <EditForm class="form" Model="model">
         <div class="convert-input">
             <RadzenNumeric ShowUpDown="false" TValue="decimal" @bind-Value=@leftValue Placeholder="Enter value" />
-            <RadzenDropDown TValue="CurrencyCodesEnum" Data=@currencyCodes @bind-Value=@leftCode AllowClear="false"/>
+            <RadzenDropDown TValue="CurrencyCodesEnum" Data=@currencyCodes @bind-Value=@leftCode AllowClear="false" />
         </div>
 
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
@@ -23,7 +24,7 @@
 
         <div class="convert-input">
             <RadzenNumeric ShowUpDown="false" TValue="decimal" @bind-Value=@rightValue Placeholder="Enter value" />
-            <RadzenDropDown TValue="CurrencyCodesEnum" Data=@currencyCodes @bind-Value=@rightCode AllowClear="false"/>
+            <RadzenDropDown TValue="CurrencyCodesEnum" Data=@currencyCodes @bind-Value=@rightCode AllowClear="false" />
         </div>
     </EditForm>
 </div>
@@ -31,11 +32,11 @@
 <RadzenChart>
     <RadzenLineSeries Smooth="true" Data="@ratesForChartLine" CategoryProperty="Date" Title="@model.LeftCode.ToString()" LineType="LineType.Solid" ValueProperty="Value">
         <TooltipTemplate Context="data">
-          <div>
-            <span>@data.Date.ToShortDateString()</span><br/>
-            <strong>@model.LeftCode : @data.Value.ToString("N2") @model.RightCode</strong>
-          </div>
-    </TooltipTemplate>
+            <div>
+                <span>@data.Date.ToShortDateString()</span><br />
+                <strong>@model.LeftCode : @data.Value.ToString("N2") @model.RightCode</strong>
+            </div>
+        </TooltipTemplate>
     </RadzenLineSeries>
     <RadzenValueAxis>
         <RadzenGridLines Visible="true" />
@@ -80,23 +81,20 @@
         set => model.RightValue = value;
     }
 
-    private List<RateForDate> ratesForChartLine = new List<RateForDate>();
+    private RateForDateList ratesForChartLine = RateForDateList.Empty;
 
     private string title = "Convert";
-    private string chartLineTitle = "";
-    private List<RateForDate> rates = new List<RateForDate>();
-    private List<CurrencyCodesEnum> currencyCodes = new List<CurrencyCodesEnum>();
+    private RateForDateList rates = RateForDateList.Empty;
+    private IList<CurrencyCodesEnum> currencyCodes = new List<CurrencyCodesEnum>();
     private ConvertModel model = ConvertModel.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        currencyCodes = Enum
-            .GetValues(typeof(CurrencyCodesEnum))
-            .Cast<CurrencyCodesEnum>()
-            .Where(c => c != CurrencyCodesEnum.None)
-            .ToList();
-        rates = await currenciesService.GetAllRatesForDate(DateTime.Now);
+        currencyCodes = currenciesService.GetCurrencyCodes();
+        var tasksResult = await Task.WhenAll(
+                currenciesService.GetAllRatesForDate(DateTime.Now),
+                currenciesService.GetRatesForLastQuarter(CurrencyCodesEnum.Usd));
+        (rates, ratesForChartLine, _) = tasksResult.Deconstruct();
         model = new ConvertModel(CurrencyCodesEnum.Usd, CurrencyCodesEnum.Rub, 1m, rates);
-        ratesForChartLine = await currenciesService.GetRatesForLastQuarter(model.LeftCode);
     }
 }

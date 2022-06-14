@@ -11,7 +11,7 @@ namespace WebAPI.Endpoints.Rates
 {
     public class GetForPeriodEndpoint : EndpointBaseAsync
         .WithRequest<GetForPeriodSpecification>
-        .WithResult<PeriodRateList>
+        .WithResult<RateForDateList>
     {
         private readonly IMediator _mediator;
         public GetForPeriodEndpoint(IMediator mediator) => _mediator = mediator;
@@ -22,7 +22,7 @@ namespace WebAPI.Endpoints.Rates
             Description = "Get currency rate for period",
             OperationId = "Rate.GetForPeriod",
             Tags = new[] {"RateEndpoint"})]
-        public override async Task<PeriodRateList> HandleAsync(
+        public override async Task<RateForDateList> HandleAsync(
             [FromQuery] GetForPeriodSpecification specification,
             CancellationToken cancellationToken = default) =>
             await _mediator.Send(

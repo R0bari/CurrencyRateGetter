@@ -35,7 +35,7 @@
     [Parameter]
     public string currencyParam { get; set; } = "Usd";
     public CurrencyCodesEnum currency { get; set; } = CurrencyCodesEnum.Usd;
-    private List<RateForDate> rates = new List<RateForDate>();
+    private RateForDateList rates = RateForDateList.Empty;
     private string title = $"Rates history";
 
 

@@ -11,22 +11,21 @@ public class RefresherJob : IJob
     private readonly IMediator _mediator;
     private readonly ILogger<RefresherJob> _logger;
 
-    public RefresherJob(ILogger<RefresherJob> logger, IMediator mediator)
-    {
-        _logger = logger;
-        _mediator = mediator;
-    }
+    public RefresherJob(ILogger<RefresherJob> logger, IMediator mediator) => (_logger, _mediator) = (logger, mediator);
 
-    public async Task Execute(IJobExecutionContext context)
+    public async Task Execute(IJobExecutionContext context) =>
+        LogResult(
+            await _mediator.Send(
+                    new RefreshRatesCommand())
+                .ConfigureAwait(false));
+
+    private void LogResult(int result)
     {
-        var result = await _mediator.Send(
-                new RefreshRatesCommand())
-            .ConfigureAwait(false);
         if (result >= 0)
         {
-            _logger.Log(LogLevel.Information, "Refreshing rates completed");
+            _logger.LogInformation("Refreshing rates completed");
             return;
         }
-        _logger.Log(LogLevel.Error, "Refreshing rates failed");
+        _logger.LogError("Refreshing rates failed");
     }
 }

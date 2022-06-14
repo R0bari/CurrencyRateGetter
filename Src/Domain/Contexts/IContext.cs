@@ -10,7 +10,7 @@ public interface IContext
 {
     Task<RateForDate> GetRateForDate(CurrencyCodesEnum code, DateTime date);
     
-    Task<List<RateForDate>> GetAllRatesForDate(DateTime dateTime);
+    Task<RateForDateList> GetAllRatesForDate(DateTime dateTime);
     
     Task<int> InsertRateForDate(RateForDate rateForDate);
     

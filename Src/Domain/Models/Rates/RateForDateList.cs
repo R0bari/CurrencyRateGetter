@@ -8,15 +8,15 @@ using Microsoft.VisualBasic;
 
 namespace Domain.Models.Rates;
 
-public class PeriodRateList : IEnumerable<RateForDate>
+public class RateForDateList : IEnumerable<RateForDate>
 {
-    private readonly IEnumerable<RateForDate> _list;
+    private readonly IList<RateForDate> _list;
 
-    public PeriodRateList(IEnumerable<RateForDate> list) => _list = list;
+    public RateForDateList(IEnumerable<RateForDate> enumerable) => _list = enumerable is not null ? enumerable.ToList() : new List<RateForDate>();
 
-    public static PeriodRateList Empty => new(new List<RateForDate>());
-        
-    public static PeriodRateList Prepare(DataTable currency, CurrencyCodesEnum code) =>
+    public static RateForDateList Empty => new(new List<RateForDate>());
+
+    public static RateForDateList Prepare(DataTable currency, CurrencyCodesEnum code) =>
         new(currency.Rows
             .Cast<DataRow>()
             .Select(row => new RateForDate(
@@ -33,11 +33,11 @@ public class PeriodRateList : IEnumerable<RateForDate>
             "\n");
 
     public override bool Equals(object obj) =>
-        (obj is PeriodRateList) is not false
+        obj is RateForDateList list is not false
         &&
-        Equals((PeriodRateList) obj);
+        Equals(list);
 
-    private bool Equals(PeriodRateList other)
+    private bool Equals(RateForDateList other)
     {
         var thisList = _list.ToList();
         var otherList = other.ToList();

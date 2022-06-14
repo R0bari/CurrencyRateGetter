@@ -56,7 +56,7 @@ public class SbrRatesTests
     [Fact]
     public async void TestCbrGetRateForPeriodResult()
     {
-        var expected = new PeriodRateList(
+        var expected = new RateForDateList(
             new List<RateForDate>
             {
                 new(
@@ -90,7 +90,7 @@ public class SbrRatesTests
     [Fact]
     public async void TestCbrGetRateForPeriodWithHolidays()
     {
-        var expected = new PeriodRateList(
+        var expected = new RateForDateList(
             new List<RateForDate>
             {
                 new(

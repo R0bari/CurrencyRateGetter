@@ -40,13 +40,13 @@ public class CachedCbrRateService : IRateService
         return await Task.FromResult(result);
     }
 
-    public async Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second, CurrencyCodesEnum code)
+    public async Task<RateForDateList> GetRatesForPeriodAsync(DateTime first, DateTime second, CurrencyCodesEnum code)
     {
         if (_cache.TryGetValue(
                 first < second
                     ? (code, first, second)
                     : (code, second, first),
-                out PeriodRateList periodRateList))
+                out RateForDateList periodRateList))
         {
             return await Task.FromResult(periodRateList);
         }
@@ -54,7 +54,7 @@ public class CachedCbrRateService : IRateService
         var result = await _cbrRateService
             .GetRatesForPeriodAsync(first, second, code)
             .ConfigureAwait(false);
-        if (!Equals(result, PeriodRateList.Empty))
+        if (!Equals(result, RateForDateList.Empty))
         {
             _cache.Set(
                 (code, first, second),

@@ -54,10 +54,10 @@ public record CbrRateService : IRateService
                 : RateForDate.Empty);
     }
 
-    public async Task<PeriodRateList> GetRatesForPeriodAsync(DateTime first, DateTime second,
+    public async Task<RateForDateList> GetRatesForPeriodAsync(DateTime first, DateTime second,
         CurrencyCodesEnum code) =>
         first == second
-            ? new PeriodRateList(new List<RateForDate>
+            ? new RateForDateList(new List<RateForDate>
             {
                 await GetRateAsync(first, code)
                     .ConfigureAwait(false)
@@ -65,7 +65,7 @@ public record CbrRateService : IRateService
             : await ReadRatesForDateFromXml(first, second, code);
 
 
-    private static async Task<PeriodRateList> ReadRatesForDateFromXml(DateTime first, DateTime second,
+    private static async Task<RateForDateList> ReadRatesForDateFromXml(DateTime first, DateTime second,
         CurrencyCodesEnum code)
     {
         var currency = ReadTableFromXml(
@@ -75,8 +75,8 @@ public record CbrRateService : IRateService
             $"&VAL_NM_RQ={code.Description()}",
             "Record");
         return await Task.FromResult(currency?.Rows is null
-            ? PeriodRateList.Empty
-            : PeriodRateList.Prepare(currency, code));
+            ? RateForDateList.Empty
+            : RateForDateList.Prepare(currency, code));
     }
 
     private static DataTable ReadTableFromXml(string fileName, string tableName)

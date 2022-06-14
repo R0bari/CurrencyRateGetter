@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain.Contexts;
@@ -7,13 +6,13 @@ using MediatR;
 
 namespace DomainServices.Queries.Currencies.Rates.GetAllRatesForDate;
 
-public class GetAllRatesForDateHandler : IRequestHandler<GetAllRatesForDateQuery, List<RateForDate>>
+public class GetAllRatesForDateHandler : IRequestHandler<GetAllRatesForDateQuery, RateForDateList>
 {
     private readonly IContext _context;
 
     public GetAllRatesForDateHandler(IContext context) => _context = context;
 
-    public async Task<List<RateForDate>> Handle(GetAllRatesForDateQuery request, CancellationToken cancellationToken) =>
+    public async Task<RateForDateList> Handle(GetAllRatesForDateQuery request, CancellationToken cancellationToken) =>
         await _context
             .GetAllRatesForDate(request.Specification.DateTime)
             .ConfigureAwait(false);

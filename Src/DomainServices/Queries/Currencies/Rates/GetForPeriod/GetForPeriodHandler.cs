@@ -6,13 +6,13 @@ using MediatR;
 
 namespace DomainServices.Queries.Currencies.Rates.GetForPeriod;
 
-public class GetForPeriodHandler : IRequestHandler<GetForPeriodQuery, PeriodRateList>
+public class GetForPeriodHandler : IRequestHandler<GetForPeriodQuery, RateForDateList>
 {
     private readonly IRateService _rateService;
 
     public GetForPeriodHandler(IRateService rateService) => _rateService = rateService;
 
-    public async Task<PeriodRateList> Handle(GetForPeriodQuery request, CancellationToken cancellationToken) =>
+    public async Task<RateForDateList> Handle(GetForPeriodQuery request, CancellationToken cancellationToken) =>
         await _rateService.GetRatesForPeriodAsync(
                 request.Specification.FirstDate,
                 request.Specification.SecondDate,
