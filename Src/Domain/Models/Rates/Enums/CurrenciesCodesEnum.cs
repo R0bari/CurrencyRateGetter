@@ -10,6 +10,10 @@ public enum CurrencyCodesEnum
     Usd,
     [Description("R01239")]
     Eur,
+    [Description("R01035")]
+    Gbp,
+    [Description("R01375")]
+    Cny,
     [Description("-")]
     Rub
 }

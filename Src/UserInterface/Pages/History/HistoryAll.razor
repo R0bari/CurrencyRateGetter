@@ -1,0 +1,38 @@
+﻿@page "/history"
+
+<PageTitle>@title</PageTitle>
+
+@using UserInterface.Services;
+
+@inject CurrenciesService currenciesService;
+@inject NavigationManager uriHelper;
+
+<div class="component-header">
+    <h1>@title</h1>
+</div>
+
+<RadzenDataGrid AllowSorting="true" Data="@currencyRates" TItem="RateForDate" ColumnWidth="300px"
+                RowClick="@OnClick" CellRender="@CellRender">
+    <Columns>
+        <RadzenDataGridColumn TItem="RateForDate" Property="Code" Filterable="false" Title="Currency" Width="200px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="RateForDate" Property="Value" Filterable="false" Title="Current value" Width="200px" TextAlign="TextAlign.Left" />
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    private string title = "Rates history";
+    private List<RateForDate> currencyRates = new List<RateForDate>();
+
+    protected override async Task OnInitializedAsync() =>
+        currencyRates = await currenciesService.GetAllRatesForDate(DateTime.Now);
+
+    private void OnClick(DataGridRowMouseEventArgs<RateForDate> args) =>
+        uriHelper.NavigateTo($"history/{args.Data.Code}");
+
+    void CellRender(DataGridCellRenderEventArgs<RateForDate> args) =>
+        args.Attributes.Add(
+            "style",
+            args.Column.Property == "Code"
+            ? "cursor: pointer"
+            : "cursor: default");
+}

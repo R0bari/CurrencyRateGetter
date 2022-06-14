@@ -1,20 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainServices.Tests", "Tests\DomainServices.Tests\DomainServices.Tests.csproj", "{118D4BAB-BFBE-41EC-83BF-7D3D29C3FB7C}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainServices.Tests", "Tests\DomainServices.Tests\DomainServices.Tests.csproj", "{118D4BAB-BFBE-41EC-83BF-7D3D29C3FB7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.Tests", "Tests\WebAPI.Tests\WebAPI.Tests.csproj", "{FDE21B6F-30F1-4F9D-ADD1-211B7B128C71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI.Tests", "Tests\WebAPI.Tests\WebAPI.Tests.csproj", "{FDE21B6F-30F1-4F9D-ADD1-211B7B128C71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainServices", "Src\DomainServices\DomainServices.csproj", "{89985DD8-8F36-411B-B048-AB2638D97BED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainServices", "Src\DomainServices\DomainServices.csproj", "{89985DD8-8F36-411B-B048-AB2638D97BED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Tests", "Tests\Database.Tests\Database.Tests.csproj", "{19D1E01F-09BB-4C7D-BA15-5DD8AB372FB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database.Tests", "Tests\Database.Tests\Database.Tests.csproj", "{19D1E01F-09BB-4C7D-BA15-5DD8AB372FB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundServices", "Src\BackgroundServices\BackgroundServices.csproj", "{4D5FA6EE-3B09-4D8E-8B8B-81DF3741C478}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundServices", "Src\BackgroundServices\BackgroundServices.csproj", "{4D5FA6EE-3B09-4D8E-8B8B-81DF3741C478}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "Src\DataBase\DataBase.csproj", "{6583D2EE-BEC0-4F80-8EAD-E54A642FF4D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "Src\DataBase\DataBase.csproj", "{6583D2EE-BEC0-4F80-8EAD-E54A642FF4D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Src\Domain\Domain.csproj", "{2EDA9B7F-7ED6-4E20-AD28-213F110865F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Src\Domain\Domain.csproj", "{2EDA9B7F-7ED6-4E20-AD28-213F110865F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "Src\WebAPI\WebAPI.csproj", "{27B7E3B0-F599-4BB9-B041-42C731D18481}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "Src\WebAPI\WebAPI.csproj", "{27B7E3B0-F599-4BB9-B041-42C731D18481}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInterface", "Src\UserInterface\UserInterface.csproj", "{9670C39C-132F-4844-BBCD-045CF65EB9FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,5 +59,15 @@ Global
 		{27B7E3B0-F599-4BB9-B041-42C731D18481}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27B7E3B0-F599-4BB9-B041-42C731D18481}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27B7E3B0-F599-4BB9-B041-42C731D18481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9670C39C-132F-4844-BBCD-045CF65EB9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9670C39C-132F-4844-BBCD-045CF65EB9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9670C39C-132F-4844-BBCD-045CF65EB9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9670C39C-132F-4844-BBCD-045CF65EB9FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EAD3B432-EA2A-4A4C-89C7-3441667C8328}
 	EndGlobalSection
 EndGlobal
