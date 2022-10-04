@@ -1,4 +1,12 @@
-﻿.convert-block, .convert-input {
+﻿* {
+    
+}
+
+.component-wrapper {
+    width: 850px;
+}
+
+.convert-block, .convert-input {
     display: flex;
     flex-direction: row;
     width: fit-content;

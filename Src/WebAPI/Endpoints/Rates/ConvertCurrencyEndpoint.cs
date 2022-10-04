@@ -27,8 +27,7 @@ public class ConvertCurrencyEndpoint : EndpointBaseAsync
         Tags = new[] {"RateEndpoint"})]
     public override async Task<decimal> HandleAsync(
         [FromQuery] ConvertCurrencySpecification specification,
-        CancellationToken cancellationToken = default) =>
-        await _mediator
+        CancellationToken cancellationToken = default) => await _mediator
             .Send(new ConvertCurrencyQuery(specification), cancellationToken)
             .ConfigureAwait(false);
 }
